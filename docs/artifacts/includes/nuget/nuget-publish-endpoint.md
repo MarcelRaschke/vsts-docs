@@ -3,65 +3,58 @@ ms.topic: include
 ms.technology: devops-cicd
 ms.author: rabououn
 author: ramiMSFT
-ms.date: 06/22/2020
+ms.date: 07/15/2021
 ---
 
 ::: moniker range=">= azure-devops-2019"
 
-1. Go to your feed ([or create a feed if you haven't](../../get-started-nuget.md#create-a-feed)). 
+1. From within your project, select **Artifacts**, and then select your feed. You can [create a new feed](../../get-started-nuget.md#create-a-feed) if you don't have one already. 
 
-1. Select **Connect to feed**:
+1. Select **Connect to feed**.
 
-   > [!div class="mx-imgBorder"] 
-   > ![Connect to feed button on the upper right of the page](../../media/connect-to-feed-azure-devops-newnav.png)
+    :::image type="content" source="../../media/connect-to-feed-azure-devops-newnav.png" alt-text="Connect to your feed":::
 
 1. Select **NuGet.exe** under the **NuGet** header.
 
-1. If you installed NuGet, and you have at least one edition of Visual Studio on your machine, you can *move to the next step*. Otherwise: <p></p>
+    :::image type="content" source="../../media/nuget-connect-feed.png" alt-text="NuGet.exe feed connection":::
 
-    1. Select **Get the tools** in the upper-right corner.
-    1. Download the latest NuGet version if you haven't yet.
-    1. Download and install the credential provider (if you don't have any Visual Studio edition).
+1. If this is the first time using Azure Artifacts with Nuget.exe, select **Get the tools** button and follow the instructions to install the prerequisites.
 
-1. Copy the `xml` code snippet in the **Project setup** section and add/create a `nuget.config` file for your project. Place your file in the same folder as your .`csproj` or `.sln` file.
+    1. Download the [latest NuGet version](https://www.nuget.org/downloads).
+    1. Download and install the [Azure Artifacts Credential Provider](https://github.com/microsoft/artifacts-credprovider#azure-artifacts-credential-provider).
 
-1. To publish your package to your feed, run the command in the **Publish packages** section in an elevated PowerShell window. Don't forget to specify your local package path (for example: ..\HelloWorld\NuGetPackage\HelloWorld1.0.0.nupkg).
+1. Follow the instructions in the **Project setup** to connect to your feed. 
 
-   > [!div class="mx-imgBorder"] 
-   > ![NuGet publish instructions in Connect to feed dialog box](../../media/nuget-azure-devops-newnav.png)
+    :::image type="content" source="../../media/project-setup.png" alt-text="Project setup":::
 
-> [!NOTE]
-> * The NuGet `push` command requires an API key. You can use any non-empty string for this variable. In our example, we used the string `key`.
-> * For more information on using credential providers with NuGet, see [Creating a NuGet credential provider](/nuget/reference/extensibility/nuget-exe-credential-providers#creating-a-nugetexe-credential-provider).
-> * For more information on using personal access tokens, see [Authenticate access with personal access tokens](../../../organizations/accounts/use-personal-access-tokens-to-authenticate.md).
+## Publish a NuGet package by using the command line
 
-## Publish a NuGet package by using the NuGet CLI
+If you don't have a NuGet package but you want to try publishing your package to your feed, you can install the *HelloWorld* sample package.
 
-To publish your package by using the NuGet CLI, you need the following variables:
+```Command
+nuget install HelloWorld -ExcludeVersion
+```
 
-- **SourceName**: The name of your feed created in step 1 of this article.
-- **SourceURL**: The feed URL (step 6). You can find it in the **Project setup** section, under `value`. In the Azure DevOps portal, go to **Artifact** > **Your feed name** > **Connect to feed** > **Project setup**.
-- **UserName** and **PAT**: Your username and personal access token. For help with setting up your credentials, see [Authenticate access with personal access tokens](../../../organizations/accounts/use-personal-access-tokens-to-authenticate.md).
+Run the following command to publish your package to your feed:
+
+```Command
+nuget.exe push -Source "<YOUR_FEED_NAME>" -ApiKey <ANY_STRING> <PACKAGE_PATH>
+```
 
 ::: moniker-end
 
 ::: moniker range=">=tfs-2017 < azure-devops-2019"
 
-1. Go to your feed ([or create a feed if you haven't](../../index.yml)). 
+1. Select **Build and Release** > **Packages**.
 
-2. Select **Connect to feed**:
+1. Select your feed from the dropdown menu or [create one](../../get-started-nuget.md#create-a-feed) if you haven't. 
 
-   > [!div class="mx-imgBorder"] 
-   > ![Connect to feed button on the upper right of the page](../../media/connect-to-feed.png)
+1. Select **Connect to feed**.
 
+    :::image type="content" source="../../media/connect-to-feed.png" alt-text="Connect to feed - TFS":::
 
-3. Follow steps 1 and 2 to get the tools, add the feed to your local NuGet configuration, and push the package.
+1. Select **NuGet** and follow the instruction to connect to your feed.
 
-   > [!div class="mx-imgBorder"]
-   > ![NuGet publish instructions in the Connect to feed dialog box](../../media/nugeturl.png)
+    :::image type="content" source="../../media/connect-to-nuget-feed-tfs.png" alt-text="Connect to NuGet feed - TFS":::
 
 ::: moniker-end
-
-> [!NOTE]
-> You can use the symbols of your NuGet packages to debug your application. You can publish your symbols to a file share using the [index sources and publish symbols task](../../../pipelines/tasks/build/index-sources-publish-symbols.md) as well as in your build pipeline that produces the NuGet packages. See [Symbol files overview](../../concepts/symbols.md) and [How to publish your symbols for debugging](../../../pipelines/artifacts/symbols.md) for more information.
-> Publishing your symbols to Azure Artifact feeds from the command line is not currently supported.

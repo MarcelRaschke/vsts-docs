@@ -13,8 +13,7 @@ ms.date: 08/04/2016
 
 # WorkItem.PartialOpen Method
 
-
-[!INCLUDE [temp](../../includes/version-vsts-tfs-all-versions.md)]
+**TFS 2018 | TFS 2017 | TFS 2015**
 
 Opens this work item for modification by loading only the latest revision of this WorkItem. Whenever possible, use this method instead of [Open](open.md) because PartialOpen provides better performance.  
 
@@ -33,7 +32,6 @@ Opens this work item for modification by loading only the latest revision of thi
 <code>public void PartialOpen()</code>
 </td>
 </tr>
-
 <tr>
 <td> 
 <h4>C++</h4>
@@ -43,7 +41,6 @@ Opens this work item for modification by loading only the latest revision of thi
 <code>void PartialOpen()</code>
 </td>
 </tr>
-
 <tr>
 <td> 
 <h4>F#</h4>
@@ -52,7 +49,6 @@ Opens this work item for modification by loading only the latest revision of thi
 <code>member PartialOpen : unit -&gt; unit</code>
 </td>
 </tr>
-
 <tr>
 <td> 
 <h4>JScript</h4>
@@ -61,7 +57,6 @@ Opens this work item for modification by loading only the latest revision of thi
 <code>public void PartialOpen()</code>
 </td>
 </tr>
-
 <tr>
 <td> 
 <h4>VB</h4>
@@ -74,38 +69,6 @@ Opens this work item for modification by loading only the latest revision of thi
 </table>
 
 
-<!---
-
-<a data-toggle="collapse" href="#expando-agent-pools">C# ▼</a>
-<div class="collapse" id="expando-queues"> 
-```public void PartialOpen()```
-</div>
-
-<a data-toggle="collapse" href="#expando-agent-pools">C++ ▼</a>
-<div class="collapse" id="expando-queues"> 
-```public:  
-void PartialOpen()```
-</div>
-
-
-<a data-toggle="collapse" href="#expando-agent-pools">F# ▼</a>
-<div class="collapse" id="expando-queues"> 
-```member PartialOpen : unit -> unit```
-</div>
-
-
-<a data-toggle="collapse" href="#expando-agent-pools">JScript ▼</a>
-<div class="collapse" id="expando-queues"> 
-```public function PartialOpen()```
-</div>
-
-<a data-toggle="collapse" href="#expando-agent-pools">VB ▼</a>
-<div class="collapse" id="expando-queues"> 
-```'Declaration  
-Public Sub PartialOpen```
-</div>
-
----> 
 
 ## Exceptions
 

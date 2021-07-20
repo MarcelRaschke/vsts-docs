@@ -4,7 +4,7 @@ description: Improve pipeline performance by caching files, like dependencies, b
 ms.assetid: B81F0BEC-00AD-431A-803E-EDD2C5DF5F97
 ms.topic: conceptual
 ms.manager: adandree
-ms.date: 05/11/2020
+ms.date: 04/06/2021
 monikerRange: azure-devops
 ---
 
@@ -24,22 +24,25 @@ Pipeline caching and [pipeline artifacts](../artifacts/pipeline-artifacts.md) pe
 
 * **Use pipeline caching** when you want to improve build time by reusing files from previous runs (and not having these files will not impact the job's ability to run).
 
-## Using the Cache task
+> [!NOTE]
+> Caching is currently free, and caches are stored in Azure blob storage.
+
+## Use Cache task
 
 Caching is added to a pipeline using the `Cache` pipeline task. This task works like any other task and is added to the `steps` section of a job. 
 
-When a cache step is encountered during a run, the task will restore the cache based on the provided inputs. If no cache is found, the step completes and the next step in the job is run. After all steps in the job have run and assuming a successful job status, a special "save cache" step is run for each "restore cache" step that was not skipped. This step is responsible for saving the cache.
+When a cache step is encountered during a run, the task will restore the cache based on the provided inputs. If no cache is found, the step completes and the next step in the job is run. After all steps in the job have run and assuming a successful job status, a special "save cache" step is run for each "restore cache" step that was not skipped. This step is responsible for saving the cache.   
 
 > [!NOTE]
-> Caches are immutable, meaning that once a cache is created, its contents cannot be changed. See [Can I clear a cache?](#can-i-clear-a-cache) in the FAQ section for additional details.
+> Caches are immutable, meaning that once a cache is created, its contents cannot be changed.
 
-### Configuring the task
+### Configure Cache task
 
 The `Cache` task has two required inputs: `key` and `path`. 
 
 #### Path input
 
-`path` should be set to the directory to populate the cache from (on save) and to store files in (on restore). It can be absolute or relative. Relative paths are resolved against `$(System.DefaultWorkingDirectory)`.
+`path` the path of the folder to cache. Can be an absolute or a relative path. Relative paths are resolved against `$(System.DefaultWorkingDirectory)`. You can use predefined variables however wildcards are not supported.
 
 #### Key input
 
@@ -73,10 +76,9 @@ variables:
 steps:
 - task: Cache@2
   inputs:
-    key: 'yarn | "$(Agent.OS)" | yarn.lock'
+    key: '"yarn" | "$(Agent.OS)" | yarn.lock'
     restoreKeys: |
        yarn | "$(Agent.OS)"
-       yarn
     path: $(YARN_CACHE_FOLDER)
   displayName: Cache Yarn packages
 
@@ -113,11 +115,10 @@ variables:
 steps:
 - task: Cache@2
   inputs:
-    key: yarn | $(Agent.OS) | yarn.lock
-    path: $(YARN_CACHE_FOLDER)
+    key: '"yarn" | "$(Agent.OS)" | yarn.lock'
     restoreKeys: |
-      yarn | $(Agent.OS)
-      yarn
+       yarn | "$(Agent.OS)"
+    path: $(YARN_CACHE_FOLDER)
   displayName: Cache Yarn packages
 
 - script: yarn --frozen-lockfile
@@ -150,7 +151,7 @@ When a cache step is encountered during a run, the cache identified by the key i
 |--------|------|-------|
 | Source branch | Yes | No |
 | Target branch | Yes | No |
-| Intermediate branch (e.g. `refs/pull/1/merge`) | Yes | Yes |
+| Intermediate branch (such as `refs/pull/1/merge`) | Yes | Yes |
 | main branch | Yes | No |
 
 ### Pull request fork runs
@@ -158,7 +159,7 @@ When a cache step is encountered during a run, the cache identified by the key i
 | Branch | Read | Write |
 |--------|------|-------|
 | Target branch | Yes | No |
-| Intermediate branch (e.g. `refs/pull/1/merge`) | Yes | Yes |
+| Intermediate branch (such as `refs/pull/1/merge`) | Yes | Yes |
 | main branch | Yes | No |
 
 > [!TIP]
@@ -208,9 +209,9 @@ steps:
 - script: bundle install
 ```
 
-## ccache (C/C++)
+## Ccache (C/C++)
 
-[ccache](https://ccache.dev/) is a compiler cache for C/C++. To use ccache in your pipeline make sure `ccache` is installed, and optionally added to your `PATH` (see [ccache run modes](https://ccache.dev/manual/3.7.1.html#_run_modes)). Set the `CCACHE_DIR` environment variable to a path under `$(Pipeline.Workspace)` and cache this directory.
+[Ccache](https://ccache.dev/) is a compiler cache for C/C++. To use Ccache in your pipeline make sure `Ccache` is installed, and optionally added to your `PATH` (see [Ccache run modes](https://ccache.dev/manual/3.7.1.html#_run_modes)). Set the `CCACHE_DIR` environment variable to a path under `$(Pipeline.Workspace)` and cache this directory.
 
 **Example**:
 
@@ -228,14 +229,12 @@ steps:
   inputs:
     key: 'ccache | "$(Agent.OS)"'
     path: $(CCACHE_DIR)
+    restoreKeys: | 
+      ccache | "$(Agent.OS)"
   displayName: ccache
 ```
 
-> [!NOTE]
-> In this example, the key is a fixed value (the OS name) and because caches are immutable, once a cache with this key is created for a particular scope (branch), the cache cannot be updated. This means subsequent builds for the same branch will not be able to update the cache even if the cache's contents have changed. This problem will be addressed in an upcoming feature: [10842: Enable fallback keys in Pipeline Caching](https://github.com/microsoft/azure-pipelines-tasks/issues/10842)
-
-See [ccache configuration settings](
-https://ccache.dev/manual/latest.html#_configuration_settings) for more options, including settings to control compression level.
+See [Ccache configuration settings](https://ccache.dev/manual/latest.html#_configuration_settings) for more details.
 
 ## Docker images
 
@@ -243,26 +242,27 @@ Caching Docker images dramatically reduces the time it takes to run your pipelin
 
 ```yaml
 pool:
-  vmImage: ubuntu-16.04
+  vmImage: 'Ubuntu-16.04'
 
 steps:
   - task: Cache@2
     inputs:
-      key: 'docker | "$(Agent.OS)" | caching-docker.yml'
+      key: 'docker | cache'
       path: $(Pipeline.Workspace)/docker
-      cacheHitVar: DOCKER_CACHE_RESTORED
-    displayName: Caching Docker image
-
+      cacheHitVar: DOCKER_CACHE_HIT
+    displayName: Cache Docker images
   - script: |
-      docker load < $(Pipeline.Workspace)/docker/cache.tar
-    condition: and(not(canceled()), eq(variables.DOCKER_CACHE_RESTORED, 'true'))
-
+      docker load -i $(Pipeline.Workspace)/docker/cache.tar
+    displayName: Restore Docker image
+    condition: and(not(canceled()), eq(variables.DOCKER_CACHE_HIT, 'true'))
   - script: |
       mkdir -p $(Pipeline.Workspace)/docker
-      docker pull ubuntu
-      docker save ubuntu > $(Pipeline.Workspace)/docker/cache.tar
-    condition: and(not(canceled()), or(failed(), ne(variables.DOCKER_CACHE_RESTORED, 'true')))
+      docker save -o $(Pipeline.Workspace)/docker/cache.tar cache
+    displayName: Save Docker image
+    condition: and(not(canceled()), or(failed(), ne(variables.DOCKER_CACHE_HIT, 'true')))
 ```
+
+Replace `caching-docker.yml` with your own pipeline YAML file.
 
 ## Golang
 
@@ -287,7 +287,7 @@ steps:
 
 ## Gradle
 
-Using Gradle's [built-in caching support](https://docs.gradle.org/current/userguide/build_cache.html) can have a significant impact on build time. To enable, set the `GRADLE_USER_HOME` environment variable to a path under `$(Pipeline.Workspace)` and either pass `--build-cache` on the command line or set `org.gradle.caching=true` in your `gradle.properties` file.
+Using Gradle's [built-in caching support](https://docs.gradle.org/current/userguide/build_cache.html) can have a significant impact on build time. To enable the build cache, set the `GRADLE_USER_HOME` environment variable to a path under `$(Pipeline.Workspace)` and either run your build with `--build-cache` or add `org.gradle.caching=true` to your `gradle.properties` file.
 
 **Example**:
 
@@ -298,20 +298,30 @@ variables:
 steps:
 - task: Cache@2
   inputs:
-    key: 'gradle | "$(Agent.OS)"'
-    restoreKeys: gradle
+    key: 'gradle | "$(Agent.OS)" | **/build.gradle.kts' # Swap build.gradle.kts for build.gradle when using Groovy
+    restoreKeys: |
+      gradle | "$(Agent.OS)"
+      gradle
     path: $(GRADLE_USER_HOME)
-  displayName: Gradle build cache
+  displayName: Configure gradle caching
 
-- script: |
-    ./gradlew --build-cache build    
+- task: Gradle@2
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'build'
+    options: '--build-cache'
+  displayName: Build
+
+- script: |   
     # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
     ./gradlew --stop    
   displayName: Build
 ```
 
+- **restoreKeys**: The fallback keys if the primary key fails (Optional)
+
 > [!NOTE]
-> In this example, the key is a fixed value (the OS name) and because caches are immutable, once a cache with this key is created for a particular scope (branch), the cache cannot be updated. This means subsequent builds for the same branch will not be able to update the cache even if the cache's contents have changed. This problem will be addressed in an upcoming feature:  [10842: Enable fallback keys in Pipeline Caching](https://github.com/microsoft/azure-pipelines-tasks/issues/10842).
+> Caches are immutable, once a cache with a particular key is created for a specific scope (branch), the cache cannot be updated. This means that if the key is a fixed value, all subsequent builds for the same branch will not be able to update the cache even if the cache's contents have changed. If you want to use a fixed key value, you must use the `restoreKeys` argument as a fallback option.
 
 ## Maven
 
@@ -354,12 +364,12 @@ If you use `PackageReferences` to manage NuGet dependencies directly within your
 
 ```yaml
 variables:
-  NUGET_PACKAGES: $(UserProfile)/.nuget/packages
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 
 steps:
 - task: Cache@2
   inputs:
-    key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**'
+    key: 'nuget | "$(Agent.OS)" | $(Build.SourcesDirectory)/packages.lock.json'
     restoreKeys: |
        nuget | "$(Agent.OS)"
     path: $(NUGET_PACKAGES)
@@ -369,11 +379,11 @@ steps:
 > [!TIP]
 > Environment variables always override any settings in the NuGet.Config file. If your pipeline failed with the error: `Information, There is a cache miss.`, you must create a pipeline variable for `NUGET_PACKAGES` to point to the new local path on the agent (exp d:\a\1\). Your pipeline should pick up the changes then and continue the task successfully.
 
-See [Package reference in project files](/nuget/consume-packages/package-references-in-project-files) for more details on how to enable lock file creation.
+In the above example, the `$(Build.SourcesDirectory)` points to your project's generated lock file. See [Package reference in project files](/nuget/consume-packages/package-references-in-project-files) for more details on how to enable lock file creation.
 
 ## Node.js/npm
 
-There are different ways to enable caching in a Node.js project, but the recommended way is to cache npm's [shared cache directory](https://docs.npmjs.com/misc/config#cache). This directory is managed by npm and contains a cached version of all downloaded modules. During install, npm checks this directory first (by default) for modules which can reduce or eliminate network calls to the public npm registry or to a private registry.
+There are different ways to enable caching in a Node.js project, but the recommended way is to cache npm's [shared cache directory](https://docs.npmjs.com/misc/config#cache). This directory is managed by npm and contains a cached version of all downloaded modules. During install, npm checks this directory first (by default) for modules that can reduce or eliminate network calls to the public npm registry or to a private registry.
 
 Because the default path to npm's shared cache directory is [not the same across all platforms](https://docs.npmjs.com/misc/config#cache), it is recommended to override the `npm_config_cache` environment variable to a path under `$(Pipeline.Workspace)`. This also ensures the cache is accessible from container and non-container jobs.
 
@@ -468,6 +478,36 @@ steps:
 - script: pipenv install
 ```
 
+## Python/Anaconda
+
+Set up your pipeline caching with Anaconda environments 
+
+### Example
+
+```yaml
+variables:
+  CONDA_CACHE_DIR: $(Pipeline.Workspace)/.condarc
+
+# Add conda to system path
+steps:
+- script: echo "##vso[task.prependpath]$CONDA/bin"
+  displayName: Add conda to PATH
+
+- task: Cache@2
+  displayName: Use cached Anaconda environment
+  inputs:
+    key: 'conda | "$(Agent.OS)" | environment.yml'
+    restoreKeys: | 
+      python | "$(Agent.OS)"
+      python
+    path: $(CONDA_CACHE_DIR)
+    cacheHitVar: CONDA_CACHE_RESTORED
+
+- script: conda env create --quiet --file environment.yml
+  displayName: Create Anaconda environment
+  condition: eq(variables.CONDA_CACHE_RESTORED, 'false')
+```
+
 ## PHP/Composer
 
 For PHP projects using Composer, override the `COMPOSER_CACHE_DIR` [environment variable](https://getcomposer.org/doc/06-config.md#cache-dir) used by Composer.
@@ -495,13 +535,11 @@ steps:
 
 If you experience problems enabling caching for your project, first check the list of [pipeline caching issues](https://github.com/microsoft/azure-pipelines-tasks/labels/Area%3A%20PipelineCaching) in the microsoft/azure-pipelines-tasks repo. If you don't see your issue listed, [create a new issue](https://github.com/microsoft/azure-pipelines-tasks/issues/new?labels=Area%3A%20PipelineCaching).
 
-## FAQ
+## Q&A
 
-<!-- BEGINSECTION class="md-qanda" -->
+### Q: Can I clear a cache?
 
-### Can I clear a cache?
-
-Clearing a cache is currently not supported. However you can add a string literal (e.g. `version2`) to your existing cache key to change the key in a way that avoids any hits on existing caches. For example, change the following cache key from this:
+A: Clearing a cache is currently not supported. However you can add a string literal (such as `version2`) to your existing cache key to change the key in a way that avoids any hits on existing caches. For example, change the following cache key from this:
 
 ```yaml
 key: 'yarn | "$(Agent.OS)" | yarn.lock'
@@ -513,12 +551,11 @@ to this:
 key: 'version2 | yarn | "$(Agent.OS)" | yarn.lock'
 ```
 
-### When does a cache expire?
+### Q: When does a cache expire?
 
-A cache will expire after 7 days of no activity.
+A: Caches expire after seven days of no activity.
 
-### Is there a limit on the size of a cache?
+### Q: Is there a limit on the size of a cache?
 
-There is no enforced limit on the size of individual caches or the total size of all caches in an organization.
+A: There is no enforced limit on the size of individual caches or the total size of all caches in an organization.
 
-<!-- ENDSECTION -->

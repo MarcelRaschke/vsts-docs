@@ -4,7 +4,7 @@ ms.custom: seodec18
 description: How to reuse pipelines through templates
 ms.assetid: 6f26464b-1ab8-4e5b-aad8-3f593da556cf
 ms.topic: conceptual
-ms.date: 12/22/2020
+ms.date: 06/08/2021
 monikerRange: 'azure-devops-2019 || azure-devops || azure-devops-2020'
 ---
 
@@ -12,7 +12,7 @@ monikerRange: 'azure-devops-2019 || azure-devops || azure-devops-2020'
 
 ::: moniker range=">=azure-devops-2020"
 
-Templates let you define reusable content, logic, and parameters. Templates function in two ways. You can insert reusable content with a template or you can use a template to control what is allowed in a pipeline. 
+Templates let you define reusable content, logic, and parameters. Templates function in two ways. You can insert reusable content with a template or you can use a template to control what is allowed in a pipeline. The second approach is useful for [building secure pipelines with templates](../security/templates.md).
 
 If a template is used to include content, it functions like an include directive in many programming languages. Content from one file is inserted into another file. When a template controls what is allowed in a pipeline, the template defines logic that another file must follow.  
 
@@ -563,7 +563,7 @@ jobs:
 
 For `type: github`, `name` is `<identity>/<repo>` as in the examples above.
 For `type: git` (Azure Repos), `name` is `<project>/<repo>`.
-If that project is in a separate Azure DevOps organization, you'll need to configure a [service connection](../library/service-endpoints.md) with access to the project and include that in YAML:
+If that project is in a separate Azure DevOps organization, you'll need to configure a [service connection](../library/service-endpoints.md#sep-tfsts) of type `Azure Repos/Team Foundation Server` with access to the project and include that in YAML:
 
 ```yaml
 resources:
@@ -894,7 +894,7 @@ steps:
     debug: true
 ```
 
-You can also use conditional insertion for variables:
+You can also use conditional insertion for variables. In this example, `start` always prints and `this is a test` only prints when the `foo` variable equals `test`. 
 
 ```yaml
 variables:
@@ -905,9 +905,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo "start"
+- script: echo "start" # always runs
 - ${{ if eq(variables.foo, 'test') }}:
-  - script: echo "this is a test"
+  - script: echo "this is a test" # runs when foo=test
 ```
 
 ### Iterative insertion

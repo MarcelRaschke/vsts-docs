@@ -6,9 +6,9 @@ ms.technology: devops-agile
 ms.assetid: 823CC1FD-74A9-4123-92E1-506A505DEC8D
 ms.author: kaelli
 author: KathrynEE
-ms.topic: conceptual
+ms.topic: how-to
 monikerRange: '>= tfs-2013'
-ms.date: 7/09/2020
+ms.date: 07/09/2021
 ---
 
 # Change column options 
@@ -22,7 +22,6 @@ Each column corresponds to a work item field. You can add and remove columns fro
 Specifically, you can perform the following actions from the following list views:  
 
  
---- 
 :::row:::
    :::column span="2":::
       **Action**
@@ -40,7 +39,6 @@ Specifically, you can perform the following actions from the following list view
       [**Work items**](../work-items/view-add-work-items.md)
    :::column-end:::
 :::row-end::: 
----
 :::row:::
    :::column span="2":::
       Add or remove a column field
@@ -111,11 +109,11 @@ Specifically, you can perform the following actions from the following list view
       Yes
    :::column-end:::
 :::row-end::: 
----
+
 
 
 > [!TIP]    
-> Unlike a query result, you can't sort a backlog by a column. However, you can use the **Create Query** link on each backlog to create a query that you can sort on any field column you choose.
+> Unlike a query result, you can't sort a backlog by a column. However, you can use the **Create Query** link on each backlog to create a query that you can sort on any field column you choose from the **Sorting** tab of the Column options dialog. While you may be able to add a field to sort on, not all fields are supported. For example, selection of the **Parent**, **History**, **Description**, or other rich-text field will result in the display of an error message as you can't sort on these fields. 
 
 
 ::: moniker range="azure-devops"
@@ -154,6 +152,20 @@ Once you set the column options for a specific view, your settings  persist unti
 - Column options you set for a query persist when you save the query. For Shared queries, your settings can get overwritten when someone else saves different column option settings. 
 ::: moniker-end
 
+
+::: moniker range="azure-devops"
+> [!NOTE]    
+> You can't set column options for other members of your team, nor can you set default column options.  
+::: moniker-end
+
+::: moniker range=">= azure-devops-2019 < azure-devops"
+> [!NOTE]    
+> You can't set column options for other members of your team. Also, for projects that use the Inheritance process model, you can't set default column options. For projects that use the On-premises XML process model, you can set the default column options for product, portfolio, and sprint backlogs. To learn how, see [Process configuration XML element reference](../../reference/xml/process-configuration-xml-element.md).
+::: moniker-end
+::: moniker range="<= tfs-2018"
+> [!NOTE]    
+> You can't set column options for other members of your team. For projects that use the On-premises XML process model, you can set the default column options for product and portfolio backlogs. To learn how, see [Process configuration XML element reference](../../reference/xml/process-configuration-xml-element.md).
+::: moniker-end
 
 ## Open Column options
 
@@ -248,15 +260,16 @@ For additional keyboard shortcuts, enter **?** to display available shortcuts ba
 ::: moniker range=">= azure-devops-2020"
 
 - [Display rollup progress or totals](display-rollup.md)
+- [Interactively filter backlogs, boards, queries, and plans](filter-backlogs-boards-plans.md) 
 - [Work item field index](../work-items/guidance/work-item-field.md) 
 - [Backlogs, boards, and plans](backlogs-boards-plans.md)   
 - [View, run, or email a work item query](../queries/view-run-query.md)
 - [Create managed queries](../queries/using-queries.md)
-
+- [Customize a sprint Taskboard](../sprints/customize-taskboard.md)
 ::: moniker-end
 
 ::: moniker range="< azure-devops-2020"
-
+- [Interactively filter backlogs, boards, queries, and plans](filter-backlogs-boards-plans.md) 
 - [Work item field index](../work-items/guidance/work-item-field.md) 
 - [Backlogs, boards, and plans](backlogs-boards-plans.md)   
 - [Create managed queries](../queries/using-queries.md)

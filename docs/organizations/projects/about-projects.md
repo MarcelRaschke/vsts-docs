@@ -9,7 +9,7 @@ ms.author: chcomley
 author: chcomley 
 ms.topic: conceptual
 monikerRange: '<= azure-devops'
-ms.date: 03/02/2021 
+ms.date: 05/04/2021 
 --- 
 
 # About projects and scaling your organization
@@ -154,6 +154,10 @@ As shown in the following image, you simply start typing into a people picker bo
 > [!div class="mx-imgBorder"]  
 > ![Screenshot of people picker](../../notifications/media/at-mention/identity-selector.png)  
 
+> [!WARNING]   
+> When the **Limit user visibility for projects** preview feature is enabled for the organization, project-scoped users are unable to search for users who were added to the organization through Azure Active Directory group membership, rather than through an explicit user invitation. This is an unexpected behavior and a resolution is being worked on. To self-resolve this issue, disable the **Limit user visibility for projects** preview feature for the organization.  
+
+
 Users and groups who are added to the **Project-Scoped Users** group can only see and select users and groups in the project they are connected to from a people picker. To scope people pickers for all project members, see [Manage your project, Limit identity search and selection](../../user-guide/project-admin-tutorial.md#limit-identity-selection). 
 
 ### Historical data remains visible 
@@ -249,7 +253,7 @@ You can configure and customize most services and applications to support your b
 
 As your organization grows, add teams to provide them the Agile tools that each team can configure to meet their workflow. To learn more, see the following articles.  
 
-- [Scale Agile to large teams](/azure/devops/learn/agile/scale-agile-large-teams)
+- [Scale Agile to large teams](/devops/plan/scaling-agile)
 - [About teams and Agile tools](../settings/about-teams-and-settings.md)
 - Manage a [portfolio of backlogs](../../boards/plans/portfolio-management.md) and gain insight into each team's progress and the progress of all programs.  
 - Use [Delivery plans](../../boards/plans/review-team-plans.md) to review the schedule of stories or features your teams plan to deliver. Delivery plans show the scheduled work items by sprint (iteration path) of selected teams against a calendar view.
@@ -302,7 +306,7 @@ See also, [Compatibility with Azure DevOps Server versions](/azure/devops/server
 **A.** See [Projects REST API](/rest/api/azure/devops/core/projects). 
 
 ::: moniker range=">= azure-devops-2020"
-Also, you can use the [**az devops projects** commands](/cli/azure/ext/azure-devops/devops/project).  
+Also, you can use the [**az devops project** commands](/cli/azure/devops/project).  
 ::: moniker-end
 
 

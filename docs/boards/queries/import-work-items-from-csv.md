@@ -2,13 +2,13 @@
 title: Bulk import or update work items using CSV files
 titleSuffix: Azure Boards
 description: Bulk import or update work items from a CSV formatted file 
-ms.custom: boards-queries
+ms.custom: "boards-queries, linked-from-support"
 ms.technology: devops-agile
 ms.author: kaelli
 author: KathrynEE
-ms.topic: conceptual
+ms.topic: how-to
 monikerRange: ">= azure-devops-2019"
-ms.date: 03/02/2021
+ms.date: 06/11/2021
 ---
 
 # Bulk import or update work items using CSV files
@@ -38,7 +38,9 @@ All work items you import are created in a new state. This rule means that you c
 
 1. Create a local ***import.csv*** file and open it in Visual Studio Code or Excel.
 
-2. The file must contain the **Work Item Type** and the **Title** fields. You can include other columns as needed. In the following example, we include the Priority field.
+2. The file must contain the **Work Item Type** and the **Title** fields. You can include other fields as needed. For a list of default fields, see [Work item field index](../work-items/guidance/work-item-field.md).  
+
+	In the following example, we include the **Priority** field.
 
    > [!div class="tabbedCodeSnippets"]
    ```CSV
@@ -60,10 +62,15 @@ All work items you import are created in a new state. This rule means that you c
 	> [!div class="mx-imgBorder"]  
 	> ![Import Work Items Button Image](media/import-csv/import-file.png)
 
-5. The import process loads the imported work items into the queries view in an **unsaved** state. Verify the results are what you want. Choose **Save Items** to save the work items.
+5. The import process loads the imported work items into the queries view in an **unsaved** state. No IDs are assigned. Verify the results are what you want. Then, choose **Save Items** to save the work items.
 
 	> [!div class="mx-imgBorder"]  
 	> ![Save imported work items](media/import-csv/imported-file.png)
+
+	> [!NOTE]  
+	> Make sure you don't assign IDs to new work items that you are adding. You'll receive an error message similar to the following if you do so. 
+	> [!div class="mx-imgBorder"]  
+	> ![Error message of work item ID.](media/import-csv/import-work-item-ids-assigned.png)  
 
 6. The system highlights those work items with data issues. You need to resolve the data issues before you can save the work items. In this example, an invalid value has been entered into the Priority field. Fix the data by opening the work item directly. Alternatively, use [bulk edit](../backlogs/bulk-modify-work-items.md) to fix several work items with the same issue.
 
@@ -80,34 +87,34 @@ All work items you import are created in a new state. This rule means that you c
 	> [!div class="mx-imgBorder"]  
 	> ![Export work items, CSV](media/import-csv/export-query.png)
 
-   The exported file should look similar to the following syntax:
+	The exported file should look similar to the following syntax:
 
-  > [!div class="tabbedCodeSnippets"]
-   ```CSV
-   ID,Work Item Type,State,Assigned To,Title,Tags
-   "1043","Issue","To Do",,"Fix issues with code",
-   "1044","Issue","To Do",,"Merge testing modules",
-   "1045","Issue","To Do",,"Open private preview for select customers",
-   "1046","Issue","To Do",,"Enable feature for customer champs",
-   "1047","Issue","To Do",,"Remove old test code",
-   ```
+	> [!div class="tabbedCodeSnippets"]
+	```CSV
+	ID,Work Item Type,State,Assigned To,Title,Tags
+	"1043","Issue","To Do",,"Fix issues with code",
+	"1044","Issue","To Do",,"Merge testing modules",
+	"1045","Issue","To Do",,"Open private preview for select customers",
+	"1046","Issue","To Do",,"Enable feature for customer champs",
+	"1047","Issue","To Do",,"Remove old test code",
+	```
 
 2. Make the edits to your work items. Your CSV file must contain the **ID**, **Work Item Type**, **Title**, and **State** fields. Any additional fields you want to include are optional.
 
 	> [!NOTE]   
-	> When importing identity fields, the name and email must be entered in the following format `"Display Name <email>"`. For example, to assign work to Jamal Hartnett, specify `"Jamal Hartnett <fabrikamfiber4@hotmail.com>"`
+	> When importing identity fields, the name and email must be entered in the following format `"Display Name <email>"`. For example, to assign work to Jamal Hartnett, specify `"Jamal Hartnett <fabrikamfiber4@hotmail.com>"`. If you specify a value that isn't recognized as a valid user to the system, you may encounter problems with the import. 
 
    In the following example we change several values on existing working items.
 
-  > [!div class="tabbedCodeSnippets"]
-   ```CSV
-   ID,Work Item Type,State,Assigned To,Title,Tags
-   "1043","Issue","To Do","Jamal Hartnett <fabrikamfiber4@hotmail.com>","Fix issues with code",architecture
-   "1044","Issue","To Do","Jamal Hartnett <fabrikamfiber4@hotmail.com>","Merge testing modules",testing
-   "1045","Issue","To Do","Raisa Pokrovskaya <fabrikamfiber5@hotmail.com>","Open private preview for select customers","customer focus"
-   "1046","Issue","To Do","Raisa Pokrovskaya <fabrikamfiber5@hotmail.com>","Enable feature for customer champs","customer focus"
-   "1047","Issue","To Do","Christie Church <fabrikamfiber1@hotmail.com>","Remove old test code",architecture
-   ```
+	> [!div class="tabbedCodeSnippets"]
+	```CSV
+	ID,Work Item Type,State,Assigned To,Title,Tags
+	"1043","Issue","To Do","Jamal Hartnett <fabrikamfiber4@hotmail.com>","Fix issues with code",architecture
+	"1044","Issue","To Do","Jamal Hartnett <fabrikamfiber4@hotmail.com>","Merge testing modules",testing
+	"1045","Issue","To Do","Raisa Pokrovskaya <fabrikamfiber5@hotmail.com>","Open private preview for select customers","customer focus"
+	"1046","Issue","To Do","Raisa Pokrovskaya <fabrikamfiber5@hotmail.com>","Enable feature for customer champs","customer focus"
+	"1047","Issue","To Do","Christie Church <fabrikamfiber1@hotmail.com>","Remove old test code",architecture
+	```
 
 3. Save the file and import (see steps 4-6 from the previous import section.)
 
@@ -146,6 +153,29 @@ From any query, you can export a list of work items as a comma-delimited list. S
 
 ::: moniker-end 
 
+
+::: moniker range=">= azure-devops-2020"
+
+## Export and import work items to a different project
+
+You can use this feature to export work items from one project and import them to another project. However, before importing them to another project, you must remove the work item ID. You encounter an error if you attempt to import new work items to a project with an ID specified. 
+
+
+## Import or update rich-text fields 
+
+You can update or import rich-text fields such as the **Description** or **Acceptance Criteria** fields. Rich-text fields are HTML formatted fields. Replace lines ending in CRLF by surrounding sentences with `<p>... </p>`. 
+
+For example, you can import the following work item which includes three lines of text in the Description field. 
+
+> [!div class="tabbedCodeSnippets"]
+```CSV
+Work Item Type,Title,Description
+"Product Backlog Item","Hello World Web Site - 8","<p><strong>&nbsp;You can include bold text</strong></p><p><em>&nbsp;And italic text</em></p><p><u>&nbsp;Underline text</u></p>"
+```
+
+
+::: moniker-end 
+
 ::: moniker range=">= azure-devops-2020"
 
 ## Q & A
@@ -167,7 +197,7 @@ ID,Work Item Type,Title,Assigned To,State,Priority,Tags
 
 <a id="tree-items" /> 
 
-### Can I import a CSV file that have parent-child links?
+### Can I import a CSV file that has parent-child links?
 
 Yes, you can add child work items by indenting title columns. The following example add three child Issues under the already defined Epic.
 
@@ -180,7 +210,7 @@ ID,Work Item Type,Title 1,Title 2,Assigned To,State,Priority,Tags
 ,"Issue",,"Enable feature for customer champs",,"To Do","2",
 ```
 
-Here is a better visual in Excel
+Here is a better visual in Excel.
 
 > [!div class="mx-imgBorder"]  
 > ![Excel view image](media/import-csv/import-add-child-items.png)
@@ -201,5 +231,6 @@ The work items results always lists the data errors found for individual work it
 
 ## Related articles
 
+- [Work item field index](../work-items/guidance/work-item-field.md)
 - [Bulk add or modify work items with Excel](../backlogs/office/bulk-add-modify-work-items-excel.md)
 - [FAQs: Work in Excel connected to Azure Boards](../backlogs/office/faqs.yml)

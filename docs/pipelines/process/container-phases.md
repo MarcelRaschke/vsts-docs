@@ -4,7 +4,7 @@ ms.custom: seodec18
 description: Run pipeline jobs inside of a container
 ms.assetid: 8d35f78a-f386-4699-9280-7bd933de9e7b
 ms.topic: conceptual
-ms.date: 09/11/2020
+ms.date: 06/02/2021
 monikerRange: '>= azure-devops-2019'
 ---
 
@@ -64,7 +64,7 @@ Docker must be installed. Be sure your pipelines agent has permission to access 
 
 The Windows container must support running Node.js.
 A base Windows Nano Server container is missing dependencies required to run Node.
-See [this post](/archive/blogs/nanoserver/node-js-on-nano-server) for more information about what it takes to run Node on Windows Nano Server.
+
 
 ### Hosted agents
 
@@ -140,7 +140,7 @@ private registry. Then you can reference it in a container spec:
 
 ```yaml
 container:
-  image: myprivate/registry:ubuntu1604
+  image: registry:ubuntu1604
   endpoint: private_dockerhub_connection
 
 steps:
@@ -178,7 +178,7 @@ steps:
 - script: echo hello
 ```
 
-Running `docker create --help` will give you the list of supported options.
+Running `docker create --help` will give you the list of supported options. You can use any option available with the [`docker create` command](https://docs.docker.com/engine/reference/commandline/create/).
 
 ## Reusable container definition
 
@@ -233,8 +233,8 @@ bash, sudo, which, and groupadd.
 
 ### Bring your own Node.js
 You are responsible for adding a Node binary to your container.
-Node 6 is a safe choice.
-You can start from the `node:6-alpine` image.
+Node 14 is a safe choice.
+You can start from the `node:14-alpine` image.
 
 ### Tell the agent about Node.js
 The agent will read a container label "com.azure.dev.pipelines.handler.node.path".

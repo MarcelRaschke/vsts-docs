@@ -5,7 +5,6 @@ description: Quickstart guide to signing up and inviting others to join a team p
 ms.custom: boards-get-started
 ms.technology: devops-new-user 
 ms.topic: quickstart
-ms.assetid: 
 ms.author: kaelli
 author: KathrynEE
 monikerRange: 'azure-devops'
@@ -117,7 +116,7 @@ If you have a GitHub account, follow these steps to sign up for Azure Boards.
 
 	`https://dev.azure.com/{yourorganization}`
 
-For more information about GitHub authentication, see [FAQs](../../organizations/security/faq-github-authentication.md).
+For more information about GitHub authentication, see [FAQs](../../organizations/security/faq-github-authentication.yml).
 
 Your next step is to  [create a project](#create-project). 
 

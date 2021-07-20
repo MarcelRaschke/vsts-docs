@@ -1,6 +1,6 @@
 ---
 title: Grant or restrict access to select features
-titleSuffix: Azure DevOps
+titleSuffix: Azure DevOps 
 description: How to set permissions to grant or restrict access to select build, version control, or work tracking functions  
 ms.assetid: ee4c4a8f-0478-4ade-8b12-4e5ffd0054c7
 ms.topic: conceptual
@@ -12,13 +12,13 @@ ms.date: 02/17/2021
 --- 
 
 
-# Grant or restrict access
+# Grant or restrict access using permissions
 
 [!INCLUDE [version-all](../../includes/version-all.md)]
 
 You can grant or restrict access to resources that you manage in Azure DevOps. You may want to open up or close down access to a select set of features and for a select set of users. While the built-in security groups provide a standard set of permission assignments, you may need additional security requirements not met by these assignments.
 
-If you're new to administrating permissions and groups, review [About permissions and inheritance](about-permissions.md)to learn about permission states and inheritance.
+If you're new to administrating permissions and groups, review [Get started with permissions, access, and security groups](about-permissions.md)to learn about permission states and inheritance.
 
 In this article you learn how to do the following tasks: 
 
@@ -91,12 +91,12 @@ To delegate tasks to other members within your organization, consider creating a
 <tr>
 <td>Development lead (TFVC)</td>
 <td>Manage repository and branches</td>
-<td>Administer labels, Manage branch, and Manage permissions<br/>See <a href="set-git-tfvc-repository-permissions.md" data-raw-source="[Set repository permissions for Git or TFVC](set-git-tfvc-repository-permissions.md)">Set repository permissions for Git or TFVC</a>.</td>
+<td>Administer labels, Manage branch, and Manage permissions<br/>See <a href="../../repos/tfvc/set-tfvc-repository-permissions.md" data-raw-source="[Set TFVC repository permissions](../../repos/tfvc/set-tfvc-repository-permissions.md)">Set TFVC repository permissions</a>.</td>
 </tr>
 <tr>
 <td>Software architect (Git)</td>
 <td>Manage repositories</td>
-<td>Create repositories, Force push, and Manage permissions<br/>See <a href="set-git-tfvc-repository-permissions.md" data-raw-source="[Set repository permissions for Git or TFVC](set-git-tfvc-repository-permissions.md)">Set repository permissions for Git or TFVC</a>.</td>
+<td>Create repositories, Force push, and Manage permissions<br/>See <a href="../../repos/git/set-git-repository-permissions.md" data-raw-source="[Set Git repository permissions](../../repos/git/set-git-repository-permissions.md)">Set Git repository permissions </a></td>
 </tr>
 <tr>
 <td>Team administrators</td>
@@ -138,8 +138,9 @@ Delete and restore work items, Move work items out of this project, Permanently 
 <td>For a project, Edit project-level information<br/> 
 For an account or collection, Edit instance-level (or collection-level) information<br/> To understand the scope of these permissions, see <a href="permissions-lookup-guide.md" data-raw-source="[Permission lookup guide](permissions-lookup-guide.md)">Permission lookup guide</a>. To grant permissions, See <a href="set-project-collection-level-permissions.md" data-raw-source="[Add administrators, set permissions at the project-level or project collection-level](set-project-collection-level-permissions.md)">Add administrators, set permissions at the project-level or project collection-level</a>.<br/><br/>You can also grant permissions to manage permissions for the following objects:
 <ul>
-<li><a href="set-git-tfvc-repository-permissions.md" data-raw-source="[Manage Git or TFVC repository permissions](set-git-tfvc-repository-permissions.md)">Manage Git or TFVC repository permissions</a></li>
-<li><a href="set-git-tfvc-repository-permissions.md" data-raw-source="[Manage Git branch permissions](set-git-tfvc-repository-permissions.md)">Manage Git branch permissions</a></li>
+<li><a href="../../repos/git/set-git-repository-permissions.md" data-raw-source="[Set Git repository permissions](../../repos/git/set-git-repository-permissions.md)">Set Git repository permissions </a></li>
+<li><a href="../../repos/git/branch-permissions.md" data-raw-source="[Manage Git branch permissions](../../repos/git/branch-permissions.md)">Manage Git branch permissions</a></li>
+<li><a href="../../repos/tfvc/set-tfvc-repository-permissions.md" data-raw-source="[Set TFVC repository permissions](../../repos/tfvc/set-tfvc-repository-permissions.md)">Set TFVC repository permissions </a></li>
 <li><a href="../../pipelines/policies/set-permissions.md" data-raw-source="[Administer build and release permissions](../../pipelines/policies/set-permissions.md)">Administer build and release permissions</a></li>
 <li><a href="../../project/wiki/manage-readme-wiki-permissions.md" data-raw-source="[Manage Wiki permissions](../../project/wiki/manage-readme-wiki-permissions.md)">Manage Wiki permissions</a>.</li>
 </td>
@@ -194,7 +195,7 @@ Azure DevOps is designed to enable all valid users to view all objects defined i
 </tr>
 <tr>
 <td>View or contribute to a repository</td>
-<td>View, Contribute<br/>See <a href="set-git-tfvc-repository-permissions.md" data-raw-source="[Set repository permissions for Git or TFVC](set-git-tfvc-repository-permissions.md)">Set repository permissions for Git or TFVC</a>.</td>
+<td>View, Contribute<br/>See <a href="../../repos/git/set-git-repository-permissions.md" data-raw-source="[Set Git repository permissions](../../repos/git/set-git-repository-permissions.md)">Set Git repository permissions</a> or <a href="../../repos/tfvc/set-tfvc-repository-permissions.md" data-raw-source="[Set TFVC repository permissions](../../repos/tfvc/set-tfvc-repository-permissions.md)">Set TFVC repository permissions</a>.</td>
 </tr>
 <tr>
 <td>View, create, or modify work items within an area path</td>
@@ -215,63 +216,10 @@ See <a href="../../report/dashboards/dashboard-permissions.md" data-raw-source="
 
 <a id="restrict-modifications-wits" /> 
 
+## Restrict modification of work items or select fields 
 
-## Restrict modification of select fields based on a user or group 
-
-[!INCLUDE [temp](../../includes/restrict-modification-fields-for-not.md)]
-
-::: moniker range="azure-devops-2019"
-
-> [!NOTE]
-> For Azure DevOps Server 2019 and earlier versions, you can only restrict modification of work items based on a user or group with the On-premises XML process model. 
-
-::: moniker-end
-
-
-[!INCLUDE [temp](../../includes/restrict-modification-fields-for-not.md)]
-
-::: moniker range="< azure-devops"
-
-For the [On-premises XML process model](../../reference/on-premises-xml-process-model.md), you can customize work item types to support these restriction requests: 
-- Restrict who can create or modify a work item 
-- Restrict who can create specific work item types, such as Epics or Features 
-
-For example, you can restrict modification of work items by adding a rule to the work item type, usually within the **WORKFLOW** section. To learn more, see [Add a rule to a work item type, Apply or ignore rules based on user or group](../../reference/xml/apply-rule-work-item-field.md#apply-ignore). 
-
-You  restrict access to work tracking objects in one of two ways:
-- [Set a condition field rule](../../reference/xml/apply-rule-work-item-field.md), [a condition-based field rule](../../reference/xml/assign-conditional-based-values-and-rules.md) or a combination of the two that applies to a group. You can restrict changes from being made to a field by specifying a qualifying rule and making it apply for a specific group. Conditional rules can include **CANNOTLOSEVALUE**, **EMPTY**, **FROZEN**, **NOTSAMEAS**, **READONLY**, and **REQUIRED** elements. 
-- By [adding WITs to the Hidden Categories group](../../reference/xml/use-categories-to-group-work-item-types.md), you can prevent the majority of project contributors from creating them. You [can create a hyperlink to a template](../../boards/backlogs/work-item-template.md) that opens the work item form and share that link with those team members who you do want to create them. 
-   
-::: moniker-end
-
-
-## Restrict modification of closed work items
-
-[!INCLUDE [temp](../../includes/restrict-modification-closed-work-items.md)]
-
-::: moniker range="< azure-devops"
-
-Depending on your business processes, you may want to prevent users from continuing to modify or update work items that have been closed or completed. You can add rules to work item types to prevent users from re-opening closed work items. 
-
-For on-premises deployments, you can add rules to a work item type to prevent re-opening after a work item has been closed. For example, the following workflow transition rules allow Testers to reopen a work item, but not members of the Developers group. 
-
-```
-<TRANSITION from="Closed" to="New"  
-   for="[Project]\Testers"  
-   not="[Project]\Developers">  
-   . . .  
-</TRANSITION>  
-<TRANSITION from="Closed" to="Active"  
-   for="[Project]\Testers"  
-   not="[Project]\Developers">  
-   . . .  
-</TRANSITION>  
-```
-
-To learn more, see [Apply a field rule](../../reference/xml/apply-rule-work-item-field.md).  
-
-::: moniker-end
-
+For examples that illustrate how to restrict modification of work items or select fields, see [Sample rule scenarios](../settings/work/rule-samples.md).   
+ 
 
 
 ## Next steps
@@ -281,10 +229,11 @@ To learn more, see [Apply a field rule](../../reference/xml/apply-rule-work-item
 
 ## Related articles
 
-- [Trace permissions](faq-trace-permissions.md)
+- [Troubleshoot permissions](troubleshoot-permissions.md)
+- [Rules and rule evaluation](../settings/work/rule-reference.md)  
 - [Default permissions and access](permissions-access.md) 
 - [Permission lookup guide](permissions-lookup-guide.md) 
-- [About permissions and inheritance](about-permissions.md)
+- [Get started with permissions, access, and security groups](about-permissions.md)
 - [Permissions and groups reference](permissions.md)
 - [Set permissions at the project-level or project collection-level](set-project-collection-level-permissions.md)
 

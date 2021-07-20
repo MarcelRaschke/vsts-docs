@@ -54,8 +54,10 @@
     href: share-your-code-in-git-xcode.md
   - name: Manage repos
     items:
-    - name: Repository settings
+    - name: Repository settings and policies
       href: repository-settings.md
+    - name: Set repository permissions (Security) 
+      href: set-git-repository-permissions.md
     - name: Create a readme
       href: create-a-readme.md
     - name: Delete a repo
@@ -173,16 +175,17 @@
   items:
   - name: "Default Git permissions (Security)"
     href: ../../organizations/security/default-git-permissions.md?toc=/azure/devops/repos/toc.json&bc=/azure/devops/repos/breadcrumb/toc.json
-  - name: "Set permissions (Security)"
-    href: ../../organizations/security/set-git-tfvc-repository-permissions.md?toc=/azure/devops/repos/toc.json&bc=/azure/devops/repos/breadcrumb/toc.json
   - name: Frequently asked questions
-    href: howto.md
+    href: howto.yml
   - name: Git limits
     href: limits.md
   - name: Map TFVC actions to Git
     href: mapping-my-tfvc-actions-to-git.md
   - name: RPC failures & http.postBuffer
     href: rpc-failures-http-postbuffer.md 
+  - name: Download permissions report
+    href: ../../organizations/security/download-permissions-report.md
+    displayName: json
 - name: Resources
   items:
   - name: Pro Git

@@ -5,15 +5,15 @@ description: Limits on the resources individual users can consume in Azure DevOp
 ms.technology: devops-ecosystem
 ms.topic: conceptual
 ms.assetid: 6CBE3B3E-ABFF-4F66-8168-DB5D772E9DDB  
-ms.author: kaelli
-author: roferg
-ms.date: 01/05/2021
+ms.author: chcomley
+author: chcomley
+ms.date: 06/08/2021
 monikerRange: '>= tfs-2018'
 ---
 
 <!--- Supports FWLINK: https://go.microsoft.com/fwlink/?LinkId=692096 -->
 
-# Rate limits  
+# Rate limits
 
 [!INCLUDE [version-vsts-only](../../includes/version-vsts-only.md)]
 
@@ -39,8 +39,8 @@ This limit delays requests from individual users beyond a threshold when shared 
 This limit is focused exclusively on avoiding outages when shared resources are close to being overwhelmed.
 Individual users typically only have their requests delayed when one of the following occurs:
 
-- One of their shared resources is at risk of being overwhelmed, and 
-- Their personal usage exceeds 200 times the consumption of a typical user within a (sliding) five-minute window. 
+- One of their shared resources is at risk of being overwhelmed
+- Their personal usage exceeds 200 times the consumption of a typical user within a (sliding) five-minute window
 
 The amount of the delay depends on the user's sustained level of consumption.
 Delays range from a few milliseconds per request up to 30 seconds.
@@ -52,7 +52,7 @@ If consumption remains high, delays may continue indefinitely to protect the res
 Azure DevOps users consume many shared resources, and consumption depends on many factors. For example:
 
 - Uploading a large number of files to version control creates a large amount of load on databases and storage accounts.
-- Complex work item tracking queries create database load based on the number of work items they search through. 
+- Complex work item tracking queries create database load based on the number of work items they search through.
 - Builds drive load by downloading files from version control, producing log output, and so on.
 - All operations consume CPU and memory on various parts of the service.
 
@@ -60,11 +60,11 @@ To accommodate all of this, Azure DevOps resource consumption is expressed in ab
 
 TSTUs eventually incorporate a blend of the following:
 
-- [Azure SQL Database DTUs](/azure/azure-sql/database/purchasing-models) as a measure of database consumption   
-- Application tier and job agent CPU, memory, and I/O as a measure of compute consumption   
+- [Azure SQL Database DTUs](/azure/azure-sql/database/purchasing-models) as a measure of database consumption
+- Application tier and job agent CPU, memory, and I/O as a measure of compute consumption
 - Azure Storage bandwidth as a measure of storage consumption  
 
-For now, TSTUs are primarily focused on Azure SQL Database DTUs, since Azure SQL Databases are the shared resources most commonly overwhelmed by excessive consumption. 
+For now, TSTUs are primarily focused on Azure SQL Database DTUs, since Azure SQL Databases are the shared resources most commonly overwhelmed by excessive consumption.
 
 A single TSTU is the average load we expect a single normal user of Azure DevOps to generate per five minutes.
 Normal users also generate spikes in load.
@@ -83,6 +83,7 @@ If a pipeline is delayed or blocked by rate limiting, a message appears in the a
 
 <!---
 ### Work item tracking request limits
+
 This limit restricts individual users to 5,000 work item tracking (WIT) commands per hour per organization. When this rate is exceeded, additional WIT commands will be blocked. When
 the user falls back below this rate, the blocking will stop. It is important to note that the hour window is a sliding window.
 
@@ -98,8 +99,8 @@ To avoid hitting these limits, we recommend:
 - Reducing the frequency of running applications which make many WIT requests.
 
 As discussed above, we expect to add additional rate limits over time. And we always reserve the right to slow down or block usage which we believe to be abusive.  
---> 
 
+-->
 
 ## API client experience
 
@@ -110,20 +111,73 @@ The following table lists the headers available and what they mean.
 Except for `X-RateLimit-Delay`, all of these headers get sent before requests start getting delayed.
 This design gives clients the opportunity to proactively slow down their rate of requests.
 
-| Header name | Description |
-|-------------|-------------|
-| `Retry-After` | The [RFC 6585](https://tools.ietf.org/html/rfc6585#section-4")-specified header sent to tell you how long to wait before you send your next request to fall under the detection threshold. Units: seconds. |
-| `X-RateLimit-Resource` | A custom header indicating the service and type of threshold that was reached. Threshold types and service names may vary over time and without warning. We recommend displaying this string to a human, but not relying on it for computation. |
-| `X-RateLimit-Delay` | How long the request was delayed. Units: seconds with up to 3 decimal places (milliseconds). |
-| `X-RateLimit-Limit` | Total number of TSTUs allowed before delays are imposed. |
-| `X-RateLimit-Remaining` | Number of TSTUs remaining before being delayed. If requests are already being delayed or blocked, it's 0. |
-| `X-RateLimit-Reset` | Time at which, if all resource consumption stopped immediately, tracked usage would return to 0 TSTUs. Expressed in Unix epoch time. |
+:::row:::
+   :::column span="1":::
+      **Header name** 
+   :::column-end:::
+   :::column span="2":::
+      **Description**
+   :::column-end:::
+:::row-end:::
+---
+:::row:::
+   :::column span="1":::
+      `Retry-After`
+   :::column-end:::
+   :::column span="2":::
+       The [RFC 6585](https://tools.ietf.org/html/rfc6585#section-4")-specified header sent to tell you how long to wait before you send your next request to fall under the detection threshold. Units: seconds.
+   :::column-end:::
+:::row-end:::
+---
+:::row:::
+   :::column span="1":::
+      `X-RateLimit-Resource`
+   :::column-end:::
+   :::column span="2":::
+       A custom header indicating the service and type of threshold that was reached. Threshold types and service names may vary over time and without warning. We recommend displaying this string to a human, but not relying on it for computation.
+   :::column-end:::
+:::row-end:::
+---
+:::row:::
+   :::column span="1":::
+      `X-RateLimit-Delay`
+   :::column-end:::
+   :::column span="2":::
+       How long the request was delayed. Units: seconds with up to 3 decimal places (milliseconds). 
+   :::column-end:::
+:::row-end:::
+---
+:::row:::
+   :::column span="1":::
+      `X-RateLimit-Limit`
+   :::column-end:::
+   :::column span="2":::
+       Total number of TSTUs allowed before delays are imposed.
+   :::column-end:::
+:::row-end:::
+---
+:::row:::
+   :::column span="1":::
+      `X-RateLimit-Remaining`
+   :::column-end:::
+   :::column span="2":::
+       Number of TSTUs remaining before being delayed. If requests are already being delayed or blocked, it's 0.
+   :::column-end:::
+:::row-end:::
+---
+:::row:::
+   :::column span="1":::
+       `X-RateLimit-Reset`
+   :::column-end:::
+   :::column span="2":::
+       Time at which, if all resource consumption stopped immediately, tracked usage would return to 0 TSTUs. Expressed in Unix epoch time.
+   :::column-end:::
+:::row-end:::
+---
 
 ### Recommendations
 
-We recommend that you at least respond to the `Retry-After` header.
-If you detect a `Retry-After` header in any response, wait until that amount of time has passed before sending another request.
-Doing so helps your client application experience fewer enforced delays.
+We recommend that you at least respond to the `Retry-After` header. If you detect a `Retry-After` header in any response, wait until that amount of time has passed before sending another request. Doing so helps your client application experience fewer enforced delays. Keep in mind that the response is 200, so you don't need to apply retry logic to the request.
 
 If possible, we further recommend that you monitor `X-RateLimit-Remaining` and `X-RateLimit-Limit` headers.
 

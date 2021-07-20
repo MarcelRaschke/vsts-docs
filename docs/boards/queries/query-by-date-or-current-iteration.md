@@ -7,9 +7,9 @@ ms.technology: devops-agile
 ms.assetid: 95D9F558-E3C4-4D5F-BB69-76A3BD7625D8
 ms.author: kaelli
 author: KathrynEE
-ms.topic: sample
+ms.topic: example-scenario
 monikerRange: '>= tfs-2013'
-ms.date: 01/21/2021
+ms.date: 03/24/2021
 ---
 
 # Query by date or current iteration
@@ -292,7 +292,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
 <p>You can use date fields to filter your queries. Some of these fields are populated with information as a work item progresses from one state to another. Several of these fields do not appear on the work item form, but they are tracked for those WITs listed in the following table.</p>
 
 
----
 :::row:::
    :::column span="1":::
       **Field name**
@@ -304,7 +303,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       **Work item types**
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Activated Date (Notes 1, and 2)
@@ -317,7 +315,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       Bug, Change Request, Epic, Feature, Issue, Product Backlog Item, Requirement, Review, Risk, Shared Step, Task, Test Case, User Story  
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Change Date 
@@ -330,7 +327,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       All
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Closed Date (Note 2)
@@ -343,7 +339,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       All</p>
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Created Date
@@ -356,7 +351,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       All 
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Due Date
@@ -369,7 +363,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       Issue (Agile) 
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Finish Date (Note 3)
@@ -382,7 +375,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       Requirement, Task, Test Plan, User Story
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Iteration Path
@@ -391,8 +383,10 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       Groups work items by named sprints or time periods. The iteration must be a valid node in the project hierarchy. You [define iteration paths for a project and select iteration paths for a team](../../organizations/settings/set-iteration-paths-sprints.md) define iteration paths for a project and select iteration paths for a team.   
       Reference name=System.IterationPath, Data type=TreePath
    :::column-end:::
+   :::column span="1":::
+      All
+   :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Resolved Date (Notes 1 and 2)
@@ -405,7 +399,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       Bug, Change Request, Epic, Feature, Issue, Product Backlog Item, Requirement, Review, Risk, Shared Step, Task, Test Case, User Story
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       Start Date (Note 3)
@@ -418,7 +411,6 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       Epic, Feature, Requirement, Task, Test Plan, User Story
    :::column-end:::
 :::row-end:::
----
 :::row:::
    :::column span="1":::
       State Change Date
@@ -430,8 +422,7 @@ To use this macro, the specified team must have [selected a set of sprints](../.
    :::column span="1":::
       All
    :::column-end:::
-:::row-end:::
----
+:::row-end:::	
 :::row:::
    :::column span="1":::
       Target Date
@@ -440,7 +431,7 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       The date by which a feature or work item is expected to be completed.  
       ::: moniker range="azure-devops"
       > [!NOTE]   
-      > [Delivery Plans (Preview)](../plans/review-team-plans.md) uses the Start Date and Target Date to show the span of Features, Epics, and other portfolio backlog items. 
+      > [Delivery Plans](../plans/review-team-plans.md) uses the Start Date and Target Date to show the span of Features, Epics, and other portfolio backlog items. 
       ::: moniker-end
       Reference name=Microsoft.VSTS.Scheduling.TargetDate, Data type=DateTime
    :::column-end:::
@@ -448,7 +439,7 @@ To use this macro, the specified team must have [selected a set of sprints](../.
       Epic, Feature
    :::column-end:::
 :::row-end:::
----
+
 
 
 #### Notes:
@@ -462,7 +453,9 @@ To use this macro, the specified team must have [selected a set of sprints](../.
 	</FIELD >  
     ```
 
-2. Start and Finish Date fields are calculated if you create a project plan in Microsoft Project and then synchronize that plan with tasks that are stored in Azure Boards. These fields do not appear on the work item form, but they are calculated for those backlog items and tasks that are linked to backlog items. You can view their read-only values in results from a query or from Microsoft Excel or Project. For more information, see [Create your backlog and tasks using Project](../backlogs/office/create-your-backlog-tasks-using-project.md).
+2. **Start Date** and **Finish Date** fields are calculated if you create a project plan in Microsoft Project and then synchronize that plan with tasks that are stored in Azure Boards. These fields may not appear on the work item form, but they are calculated for those backlog items and tasks that are linked to backlog items. You can view their read-only values in results from a query or from Microsoft Excel or Project. For more information, see [Create your backlog and tasks using Project](../backlogs/office/create-your-backlog-tasks-using-project.md).
+
+	[!INCLUDE [temp](../includes/deprecate-project.md)]
 
 <a id="team_view">  </a>
 <a id="current_sprint_restrict"> </a> 

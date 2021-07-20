@@ -6,6 +6,8 @@ author: ramiMSFT
 ms.date: 09/01/2020
 ---
 
+#### Project setup
+
 The **Connect to feed** dialog box generates an appropriately formatted token that you can place into your .npmrc file. The token has a lifespan of 90 days.
 
 <a id="tokenpast90"></a>
@@ -13,20 +15,19 @@ The **Connect to feed** dialog box generates an appropriately formatted token th
 > [!TIP]
 > If you want to create a token that lasts longer than 90 days, make sure you change the default expiration date.
 
-Project setup:
-
 ::: moniker range=">= azure-devops-2019"
 
-1. From **Azure Artifacts**, select **Connect to feed**.
+1. From within your project, select **Azure Artifacts**, and then select **Connect to feed**.
+
+    :::image type="content" source="../../media/connect-to-feed-devops.png" alt-text="Select Artifacts and then Connect to feed":::   
 
 1. Select **npm**.
 
-1. Select **Other** in the **Project setup** section.
+1. In the **Project setup** section, select **Other** .
 
-   > [!div class="mx-imgBorder"] 
-   > ![Screenshot of the connect to feed credentials.](../../media/connect-to-feed-npm-creds-azure-devops-newnav.png)
+    :::image type="content" source="../../media/connect-to-feed-npm-creds-azure-devops-newnav.png" alt-text="Project setup, Other OS":::
 
-1. Add a .npmrc file to your project, in the same directory as your package.json file.
+1. Add a .npmrc file in the same directory as your package.json file.
 
     ```JSON
     registry=https://pkgs.dev.azure.com/<yourOrganization>/_packaging/<yourFeed>/npm/registry/
@@ -34,47 +35,60 @@ Project setup:
     always-auth=true
     ```
 
-Set up credentials by following these steps:
+#### Credentials setup
 
-1. Copy the following code to your user .npmrc file.
+1. Copy the following snippet to your user .npmrc file.
 
-    ```
-    ; begin auth token
-    //pkgs.dev.azure.com/<yourOrganization>/_packaging/<yourFeed>/npm/registry/:username=[ANY_VALUE_BUT_NOT_AN_EMPTY_STRING]
-    //pkgs.dev.azure.com/<yourOrganization>/_packaging/<yourFeed>/npm/registry/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]
-    //pkgs.dev.azure.com/<yourOrganization>/_packaging/<yourFeed>/npm/registry/:email=npm requires email to be set but doesn't use the value
-    //pkgs.dev.azure.com/<yourOrganization>/_packaging/<yourFeed>/npm/:username=[ANY_VALUE_BUT_NOT_AN_EMPTY_STRING]
-    //pkgs.dev.azure.com/<yourOrganization>/_packaging/<yourFeed>/npm/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]
-    //pkgs.dev.azure.com/<yourOrganization>/_packaging/<yourFeed>/npm/:email=npm requires email to be set but doesn't use the value
-    ; end auth token
-    ```
+    - **Organization-scoped feed**:
 
-2. Generate a [personal access token](../../../organizations/accounts/use-personal-access-tokens-to-authenticate.md), with packaging read and write scopes.
-
-3. Base64 encode the personal access token from the previous step. Then safely encode your personal access token:
-
-    1. From a command prompt, run the following:
-        
+        ```Command
+        ; begin auth token
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/_packaging/<FEED_NAME>/npm/registry/:username=[ENTER_ANY_VALUE_BUT_NOT_AN_EMPTY_STRING]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/_packaging/<FEED_NAME>/npm/registry/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/_packaging/<FEED_NAME>/npm/registry/:email=npm requires email to be set but doesn't use the value
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/_packaging/<FEED_NAME>/npm/:username=[ANY_VALUE_BUT_NOT_AN_EMPTY_STRING]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/_packaging/<FEED_NAME>/npm/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/_packaging/<FEED_NAME>/npm/:email=npm requires email to be set but doesn't use the value
+        ; end auth token
         ```
+    
+    - **Project-scoped feed**:
+
+        ```Command
+        ; begin auth token
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/npm/registry/:username=[ENTER_ANY_VALUE_BUT_NOT_AN_EMPTY_STRING]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/npm/registry/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/npm/registry/:email=npm requires email to be set but doesn't use the value
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/npm/:username=[ENTER_ANY_VALUE_BUT_NOT_AN_EMPTY_STRING]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/npm/:_password=[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]
+        //pkgs.dev.azure.com/<ORGANIZATION_NAME>/<PROJECT_NAME>/_packaging/<FEED_NAME>/npm/:email=npm requires email to be set but doesn't use the value
+        ; end auth token
+        ```
+
+1. Generate a [personal access token](../../../organizations/accounts/use-personal-access-tokens-to-authenticate.md) with **packaging read and write** scopes.
+
+1. Encode your newly generated personal access token as follows:
+
+    1. Run the following command in an elevated command prompt window:
+        
+        ```Command
         node -e "require('readline') .createInterface({input:process.stdin,output:process.stdout,historySize:0}) .question('PAT> ',p => { b64=Buffer.from(p.trim()).toString('base64');console.log(b64);process.exit(); })"
         ```
 
-        Other options to convert your personal access token to Base64:
+        You can also use the following command to convert your personal access token to Base64 depending on your operating system:
 
-        Windows:
-        ```powershell
-        [Convert]::ToBase64String([system.Text.Encoding]::UTF8.GetBytes("YOUR_PAT_GOES_HERE"))
-        ```
+        - **Windows**:
+            ```powershell
+            [Convert]::ToBase64String([system.Text.Encoding]::UTF8.GetBytes("YOUR_PAT_GOES_HERE"))
+            ```
     
-        Mac:
-        ```
-        echo -n "YOUR_PAT_GOES_HERE" | base64
-        ```
+        - **LinuxMac**:
+            ```Command
+            echo -n "YOUR_PAT_GOES_HERE" | base64
+            ```
+    1. Copy the Base64 encoded value.
 
-    2. Paste your personal access token value, and press Enter or Return.
-    3. Copy the Base64 encoded value.
-
-4. Replace both `[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]` values in your user .npmrc file with your Base64 encoded personal access token from the previous step. You should also replace `yourOrganization` and `yourFeed`, and fill in your username, your personal access token, and email.
+1. Replace the placeholder `[BASE64_ENCODED_PERSONAL_ACCESS_TOKEN]` with your user Base64 encoded personal access token you just created. 
 
 ::: moniker-end
 

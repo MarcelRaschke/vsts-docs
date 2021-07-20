@@ -37,7 +37,7 @@ By publishing your Markdown files to a wiki, you gain the following benefits:
 - Manage content in the same way you manage your code base
 - Readers can search the wiki easily using the Wiki search feature
 
-For for information about managing the different wiki types, see [Differences between provisioned wiki and publish code as wiki](provisioned-vs-published-wiki.md).
+For information about managing the different wiki types, see [Differences between provisioned wiki and publish code as wiki](provisioned-vs-published-wiki.md).
 
 > [!TIP]
 > You can add and edit content you've published to a wiki using the steps outlined in this article. Or, you can also work offline and update wiki content in the same way you collaborate on code through a Git repository. For more information, see [Update wiki pages offline](wiki-update-offline.md).
@@ -49,7 +49,7 @@ For for information about managing the different wiki types, see [Differences be
 * You must have a team project. If you don't have a team project yet, [create one](../../organizations/projects/create-project.md).  
 * You must have enabled Azure Repos service for your project.
 * You must have a Git repository defined in your team project. Ideally, this repository contains at least one Markdown file, which you want to publish to your wiki. If you need to add a Git repository, see [Create a new Git repo in your project](../../repos/git/create-new-repo.md).
-* You must have the permission **Contribute** to publish code as wiki. By default, this permission is set for members of the [Project Administrators group](../../organizations/security/set-git-tfvc-repository-permissions.md). 
+* You must have the permission **Contribute** to publish code as wiki. By default, this permission is set for members of the [Contributors group](../../repos/git/set-git-repository-permissions.md). 
 * Anyone who has permissions to contribute to the Git repository can add or edit wiki pages.
 
 ## Open Wiki  
@@ -120,10 +120,10 @@ For the Wiki that's provisioned with the Markdown files you've added, you can no
 
 ::: moniker range=">= azure-devops-2020"
 
-You can publish a Git repository to a wiki with the [az devops wiki create](/cli/azure/ext/azure-devops/devops/wiki#ext-azure-devops-az-devops-wiki-create) command. To get started, see [Get started with Azure DevOps CLI](../../cli/index.md). Run this command when you maintain Markdown files in an existing Git repo and you want to publish them to a wiki.
+You can publish a Git repository to a wiki with the [az devops wiki create](/cli/azure/devops/wiki#ext-azure-devops-az-devops-wiki-create) command. To get started, see [Get started with Azure DevOps CLI](../../cli/index.md). Run this command when you maintain Markdown files in an existing Git repo and you want to publish them to a wiki.
 
 > [!NOTE]
-> You can't publish code as Wiki if your project doesn't have a Git repository already defined. If necessary, [create a new Git repo](/cli/azure/ext/azure-devops/repos#ext-azure-devops-az-repos-create), and then return to this page.
+> You can't publish code as Wiki if your project doesn't have a Git repository already defined. If necessary, [create a new Git repo](/cli/azure/repos#ext-azure-devops-az-repos-create), and then return to this page.
 
 ```azurecli 
 az devops wiki create [--mapped-path]

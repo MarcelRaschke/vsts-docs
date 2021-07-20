@@ -70,7 +70,7 @@ Use features supported by these familiar clients to manage your project and illu
 <p><b>Permissions</b></p>
 <p>Control access to specific features by setting permissions for a user or group.</p>
 
-- <a href="../organizations/security/set-permissions-access-work-tracking.md" data-raw-source="[Area and iteration paths](../organizations/security/set-permissions-access-work-tracking.md)">Area and iteration paths</a><br/>- <a href="../pipelines/policies/set-permissions.md" data-raw-source="[Build &amp; Release](../pipelines/policies/set-permissions.md)">Build &amp; Release</a><br/>- <a href="../organizations/security/set-git-tfvc-repository-permissions.md" data-raw-source="[Git](../organizations/security/set-git-tfvc-repository-permissions.md)">Git</a><br/>- <a href="../organizations/security/set-git-tfvc-repository-permissions.md" data-raw-source="[TFVC](../organizations/security/set-git-tfvc-repository-permissions.md)">TFVC</a><br/>- <a href="/azure/devops/report/dashboards/dashboard-permissions" data-raw-source="[Dashboards](../report/dashboards/dashboard-permissions.md)">Dashboards</a><br/>- <a href="../boards/queries/set-query-permissions.md" data-raw-source="[Queries](../boards/queries/set-query-permissions.md)">Queries</a><br/>- <a href="../organizations/settings/manage-teams.md" data-raw-source="[Manage teams and configure team tools](../organizations/settings/manage-teams.md)">Manage teams and configure team tools</a><br/>- <a href="../organizations/security/set-project-collection-level-permissions.md" data-raw-source="[Test](../organizations/security/set-project-collection-level-permissions.md)">Test</a><br/>- <a href="../organizations/security/permissions.md#tags" data-raw-source="[Work item tags](../organizations/security/permissions.md#tags)">Work item tags</a><br/>
+- <a href="../organizations/security/set-permissions-access-work-tracking.md" data-raw-source="[Area and iteration paths](../organizations/security/set-permissions-access-work-tracking.md)">Area and iteration paths</a><br/>- <a href="../pipelines/policies/set-permissions.md" data-raw-source="[Build &amp; Release](../pipelines/policies/set-permissions.md)">Build &amp; Release</a><br/>- <a href="../repos/git/set-git-repository-permissions.md" data-raw-source="[Git](../repos/git/set-git-repository-permissions.md)">Git</a><br/>- <a href="../repos/tfvc/set-tfvc-repository-permissions.md" data-raw-source="[TFVC](../repos/tfvc/set-tfvc-repository-permissions.md)">TFVC</a><br/>- <a href="/azure/devops/report/dashboards/dashboard-permissions" data-raw-source="[Dashboards](../report/dashboards/dashboard-permissions.md)">Dashboards</a><br/>- <a href="../boards/queries/set-query-permissions.md" data-raw-source="[Queries](../boards/queries/set-query-permissions.md)">Queries</a><br/>- <a href="../organizations/settings/manage-teams.md" data-raw-source="[Manage teams and configure team tools](../organizations/settings/manage-teams.md)">Manage teams and configure team tools</a><br/>- <a href="../organizations/security/set-project-collection-level-permissions.md" data-raw-source="[Test](../organizations/security/set-project-collection-level-permissions.md)">Test</a><br/>- <a href="../organizations/security/permissions.md#tags" data-raw-source="[Work item tags](../organizations/security/permissions.md#tags)">Work item tags</a><br/>
 
 </td>
 </tr>
@@ -259,7 +259,7 @@ Use features supported by these familiar clients to manage your project and illu
 <img src="media/features/alm-feature-links-control.png" alt="Link control, web portal"/><br/><br/>
 
 <p><b>Add or modify a field </b></p>
-<p>Add a custom field (<a href="../organizations/settings/work/customize-process.md" data-raw-source="[Azure DevOps Services](../organizations/settings/work/customize-process.md)">Azure DevOps Services</a> | <a href="../reference/add-modify-field.md" data-raw-source="[Azure DevOps Server](../reference/add-modify-field.md)">Azure DevOps Server</a> to support tracking additional data requirements or modify an existing field to apply optional rules. </p>
+<p>Add a custom field (<a href="../organizations/settings/work/customize-process.md" data-raw-source="[Azure DevOps Services](../organizations/settings/work/customize-process.md)">Azure DevOps Services</a> | <a href="../organizations/settings/work/rule-reference.md" data-raw-source="[Azure DevOps Server](../organizations/settings/work/rule-reference.md)">Azure DevOps Server</a> to support tracking additional data requirements or modify an existing field to apply optional rules. </p>
 
 
 <p><b>Restrict access</b></p>
@@ -386,15 +386,15 @@ Use features supported by these familiar clients to manage your project and illu
 
 
 <p><b>Add or modify a field </b></p>
-<p><a href="../reference/add-modify-field.md" data-raw-source="[Add or modify a field](../reference/add-modify-field.md)">Add or modify a field</a> to support work tracking and reporting by editing the WIT definition.</p>
+<p><a href="../organizations/settings/work/rule-reference.md" data-raw-source="[Add or modify a field](../organizations/settings/work/rule-reference.md)">Add or modify a field</a> to support work tracking and reporting by editing the WIT definition.</p>
 
 
 <p><b>Add rules to a field </b></p>
-<p>Apply <a href="../reference/xml/apply-rule-work-item-field.md" data-raw-source="[various rules to custom fields](../reference/xml/apply-rule-work-item-field.md)">various rules to custom fields</a> to qualify the value it can have, to copy a value, to specify a default, to restrict who can modify it, to enforce pattern matching, or to enforce conditional values.  </p>
+<p>Apply <a href="../organizations/settings/work/rule-reference.md" data-raw-source="[various rules to custom fields](../organizations/settings/work/rule-reference.md)">various rules to custom fields</a> to qualify the value it can have, to copy a value, to specify a default, to restrict who can modify it, to enforce pattern matching, or to enforce conditional values.  </p>
 
 
 <p><b>Remove a field </b></p>
-<p><a href="../reference/add-modify-field.md" data-raw-source="[Stop tracking a field by removing the field](../reference/add-modify-field.md)">Stop tracking a field by removing the field</a> from the work item form of select work item types. </p>
+<p><a href="../organizations/settings/work/rule-reference.md" data-raw-source="[Stop tracking a field by removing the field](../organizations/settings/work/rule-reference.md)">Stop tracking a field by removing the field</a> from the work item form of select work item types. </p>
 
 
 </td>
@@ -684,11 +684,11 @@ Use features supported by these familiar clients to manage your project and illu
 <p>You can <a href="/azure/devops/reference/xml/change-workflow-wit?viewFallbackFrom=vsts" data-raw-source="[define rules that change a field value](../reference/xml/change-workflow-wit.md?viewFallbackFrom=vsts)">define rules that change a field value</a> whenever you change the state, perform a transition, or select a reason.   </p>
 
 <p><b>Apply workflow conditional field rules (Azure DevOps Server)  </b></p>
-<p>You can define rules that <a href="../reference/xml/apply-rule-work-item-field.md" data-raw-source="[change a field value based on the contents of other fields](../reference/xml/apply-rule-work-item-field.md)">change a field value based on the contents of other fields</a> during workflow changes. </p>
+<p>You can define rules that <a href="../organizations/settings/work/rule-reference.md" data-raw-source="[change a field value based on the contents of other fields](../organizations/settings/work/rule-reference.md)">change a field value based on the contents of other fields</a> during workflow changes. </p>
 
 
 <p><b>Restrict who can make changes during workflow transitions (Azure DevOps Server)  </b></p>
-<p>Set a condition field rule that applies to a group to <a href="../reference/xml/apply-rule-work-item-field.md" data-raw-source="[restrict who can make changes to a workflow or a field](../reference/xml/apply-rule-work-item-field.md)">restrict who can make changes to a workflow or a field</a>.  </p>
+<p>Set a condition field rule that applies to a group to <a href="../organizations/settings/work/rule-reference.md" data-raw-source="[restrict who can make changes to a workflow or a field](../organizations/settings/work/rule-reference.md)">restrict who can make changes to a workflow or a field</a>.  </p>
 
 
 <p><b>Event-generated workflow changes or field assignments (Azure DevOps Server)</b></p>
@@ -805,7 +805,7 @@ Use features supported by these familiar clients to manage your project and illu
 <p>Merge conflicts occur when commits have changes to the same files as other newer commits in the branch history. Learn how to <a href="../repos/git/merging.md" data-raw-source="[prevent and resolve merge conflicts](../repos/git/merging.md)">prevent and resolve merge conflicts</a>.   </p>
 
 <p><b>Code search</b></p>
-<p>Maximize cross-team collaboration and code sharing by finding code across all the projects to which you have access. Narrow down your results and focus in on code by using <a href="../project/search/overview.md" data-raw-source="[filters, preview code, view history, compare versions, and more](../project/search/overview.md)">filters, preview code, view history, compare versions, and more</a> </p>
+<p>Maximize cross-team collaboration and code sharing by finding code across all the projects to which you have access. Narrow down your results and focus in on code by using <a href="../project/search/get-started-search.md" data-raw-source="[filters, preview code, view history, compare versions, and more](../project/search/get-started-search.md)">filters, preview code, view history, compare versions, and more</a> </p>
 <img src="media/features/features-index-code-search-vsts.png" alt="Search code box"/><br/>
 
 <p><b>Get notified about pull requests</b></p>
@@ -919,7 +919,7 @@ Use features supported by these familiar clients to manage your project and illu
 
 
 <p><b>Code search</b></p>
-<p>Find code across all the projects to which you have access. Narrow down your results and focus in on code by using <a href="../project/search/overview.md" data-raw-source="[filters, preview code, view history, compare versions, and more](../project/search/overview.md)">filters, preview code, view history, compare versions, and more</a> </p>
+<p>Find code across all the projects to which you have access. Narrow down your results and focus in on code by using <a href="../project/search/get-started-search.md" data-raw-source="[filters, preview code, view history, compare versions, and more](../project/search/get-started-search.md)">filters, preview code, view history, compare versions, and more</a> </p>
 <img src="media/features/features-index-code-search-vsts.png" alt="Search code box"/><br/><br/>
 
 
@@ -1764,7 +1764,7 @@ Oauth 2.0 provides safe, secure access to your resources like work items, source
 
 
 <p><b>Language Interface Packs (LIPs)</b></p>
-<p>By using a <a href="/visualstudio/install/microsoft-language-interface-packs-lips-and-visual-studio" data-raw-source="[Windows Language Interface Pack (LIP)](/visualstudio/install/microsoft-language-interface-packs-lips-and-visual-studio)">Windows Language Interface Pack (LIP)</a>, you can install a language version of Windows, and then install various User Interface Language Packs. Language packs switch your English Visual Studio Professional user interface into any of these languages and have a majority of the user interface localized. </p>
+<p>By using a <a href="https://support.microsoft.com/topic/download-office-language-interface-packs-lip-5ca3dbbe-9294-0757-1c65-b7f9f99b4da5" data-raw-source="[Windows Language Interface Pack (LIP)](https://support.microsoft.com/topic/download-office-language-interface-packs-lip-5ca3dbbe-9294-0757-1c65-b7f9f99b4da5)">Windows Language Interface Pack (LIP)</a>, you can install a language version of Windows, and then install various User Interface Language Packs. Language packs switch your English Visual Studio Professional user interface into any of these languages and have a majority of the user interface localized. </p>
 
 </td>
 <td width="33%">
@@ -1797,22 +1797,22 @@ Oauth 2.0 provides safe, secure access to your resources like work items, source
 <td width="33%">
 
 <p><b>Visual Studio language pack</b></p>
-<p>Install the <a href="https://www.microsoft.com/download/details.aspx?id=48157" data-raw-source="[language pack](https://www.microsoft.com/download/details.aspx?id=48157)">language pack</a> to <a href="/visualstudio/install/microsoft-language-interface-packs-lips-and-visual-studio" data-raw-source="[switch the UI display to different languages](/visualstudio/install/microsoft-language-interface-packs-lips-and-visual-studio)">switch the UI display to different languages</a>.  Visual Studio provides localized UI support for these 14 languages.</p>
+<p>Install the <a href="https://www.microsoft.com/download/details.aspx?id=48157" data-raw-source="[language pack](https://www.microsoft.com/download/details.aspx?id=48157)">language pack</a> to <a href="https://support.microsoft.com/topic/download-office-language-interface-packs-lip-5ca3dbbe-9294-0757-1c65-b7f9f99b4da5" data-raw-source="[switch the UI display to different languages](https://support.microsoft.com/topic/download-office-language-interface-packs-lip-5ca3dbbe-9294-0757-1c65-b7f9f99b4da5)">switch the UI display to different languages</a>.  Visual Studio provides localized UI support for these 14 languages.</p>
 <ul>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">English</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Chinese Simplified</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Chinese Traditional</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Czech</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">German</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">French</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Italian</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Japanese</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Korean</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Polish</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Portuguese (Brazil)</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Russian</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Spanish</a></li>
-<li><a href="/visualstudio/welcome-to-visual-studio-2015">Turkish</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">English</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Chinese Simplified</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Chinese Traditional</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Czech</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">German</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">French</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Italian</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Japanese</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Korean</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Polish</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Portuguese (Brazil)</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Russian</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Spanish</a></li>
+<li><a href="/previous-versions/visualstudio/visual-studio-2015/welcome-to-visual-studio-2015">Turkish</a></li>
 </ul>
 <br/>
 
@@ -2023,7 +2023,7 @@ Oauth 2.0 provides safe, secure access to your resources like work items, source
 
 
 <p><b>Code search</b></p>
-<p><a href="../project/search/overview.md" data-raw-source="[Search within your code branches (TFVC) and repositories (Git)](../project/search/overview.md)">Search within your code branches (TFVC) and repositories (Git)</a> to find files, commits, and more using powerful filters to obtain rich results. </p>
+<p><a href="../project/search/get-started-search.md" data-raw-source="[Search within your code branches (TFVC) and repositories (Git)](../project/search/get-started-search.md)">Search within your code branches (TFVC) and repositories (Git)</a> to find files, commits, and more using powerful filters to obtain rich results. </p>
 <img src="media/features/features-index-code-search-vsts.png" alt="Search code box"/><br/><br/>
 <p><b>Find work items</b></p>
 <p>When in the Work hub, <a href="../boards/queries/using-queries.md" data-raw-source="[enter IDs or keywords to start a query](../boards/queries/using-queries.md)">enter IDs or keywords to start a query</a> to find  work items that you want to review, triage, or update.</p>
@@ -2081,7 +2081,7 @@ Oauth 2.0 provides safe, secure access to your resources like work items, source
 
 
 <p><b>Code search</b></p>
-<p><a href="../project/search/overview.md" data-raw-source="[Find code based on keywords and semantic search filters](../project/search/overview.md)">Find code based on keywords and semantic search filters</a> across your Git repositories.</p>
+<p><a href="../project/search/get-started-search.md" data-raw-source="[Find code based on keywords and semantic search filters](../project/search/get-started-search.md)">Find code based on keywords and semantic search filters</a> across your Git repositories.</p>
 <img src="media/features/features-index-code-search-vsts.png" alt="Search code box"/><br/>
 <p><b>CodeLens search</b></p>
 <p><a href="/visualstudio/ide/find-code-changes-and-other-history-with-codelens" data-raw-source="[Find references and changes to your code, linked bugs, work items, code reviews, and unit tests](/visualstudio/ide/find-code-changes-and-other-history-with-codelens)">Find references and changes to your code, linked bugs, work items, code reviews, and unit tests</a>.</p>
@@ -2185,9 +2185,9 @@ Oauth 2.0 provides safe, secure access to your resources like work items, source
 <p><b>DevOps permissions</b></p>
 <p>Grant or restrict access to: </p>
 <ul>
-<li><a href="../organizations/security/set-git-tfvc-repository-permissions.md" data-raw-source="[Git repositories](../organizations/security/set-git-tfvc-repository-permissions.md)">Git repositories</a></li>
+<li><a href="../repos/git/set-git-repository-permissions.md" data-raw-source="[Git repositories](../repos/git/set-git-repository-permissions.md)">Git repositories</a></li>
 <li><a href="../repos/git/branch-permissions.md" data-raw-source="[Git branches](../repos/git/branch-permissions.md)">Git branches</a></li>
-<li><a href="../organizations/security/set-git-tfvc-repository-permissions.md" data-raw-source="[TFVC source code and folders](../organizations/security/set-git-tfvc-repository-permissions.md)">TFVC source code and folders</a></li>
+<li><a href="../repos/tfvc/set-tfvc-repository-permissions.md" data-raw-source="[TFVC source code and folders](../repos/tfvc/set-tfvc-repository-permissions.md)">TFVC source code and folders</a></li>
 <li><a href="../pipelines/policies/set-permissions.md" data-raw-source="[Build](../pipelines/policies/set-permissions.md)">Build</a></li>
 <li><a href="../organizations/security/set-project-collection-level-permissions.md" data-raw-source="[Test](../organizations/security/set-project-collection-level-permissions.md)">Test</a>)</li>
 <li><a href="../pipelines/policies/set-permissions.md" data-raw-source="[Release](../pipelines/policies/set-permissions.md)">Release</a></li>
@@ -2286,7 +2286,7 @@ Oauth 2.0 provides safe, secure access to your resources like work items, source
 <td width="33%">
 
 <p><b>Sign up for Azure DevOps Services </b></p>
-<p><a href="https://visualstudio.microsoft.com/docs/setup-admin/team-services/sign-up-for-visual-studio-team-services" data-raw-source="[Store your code, tests, and test results in the cloud with Azure DevOps Services](https://visualstudio.microsoft.com/docs/setup-admin/team-services/sign-up-for-visual-studio-team-services)">Store your code, tests, and test results in the cloud with Azure DevOps Services</a>, as well as plan your project and track progress. </p>
+<p><a href="https://devblogs.microsoft.com/devops/upcoming-changes-to-how-you-log-into-visual-studio-team-services/" data-raw-source="[Store your code, tests, and test results in the cloud with Azure DevOps Services](https://devblogs.microsoft.com/devops/upcoming-changes-to-how-you-log-into-visual-studio-team-services/)">Store your code, tests, and test results in the cloud with Azure DevOps Services</a>, as well as plan your project and track progress. </p>
 
 
 

@@ -6,7 +6,7 @@ ms.assetid: 2c586863-078f-4cfe-8158-167080cd08c1
 ms.author: sdanie
 author: steved0x
 ms.reviewer: vijayma
-ms.date: 12/15/2020
+ms.date: 07/15/2021
 monikerRange: '>= azure-devops-2019'
 ---
 
@@ -276,6 +276,39 @@ Jobs can run [conditionally](process/phases.md?tabs=yaml#conditions) and  might 
 
 # [Schema](#tab/schema)
 
+:::moniker range="azure-devops"
+
+```yaml
+jobs:
+- job: string  # name of the job (A-Z, a-z, 0-9, and underscore)
+  displayName: string  # friendly name to display in the UI
+  dependsOn: string | [ string ]
+  condition: string
+  strategy:
+    parallel: # parallel strategy; see the following "Parallel" topic
+    matrix: # matrix strategy; see the following "Matrix" topic
+    maxParallel: number # maximum number of matrix jobs to run simultaneously
+  continueOnError: boolean  # 'true' if future jobs should run even if this job fails; defaults to 'false'
+  pool: pool # see the following "Pool" schema
+  workspace:
+    clean: outputs | resources | all # what to clean up before the job runs
+  container: containerReference # container to run this job inside of
+  timeoutInMinutes: number # how long to run the job before automatically cancelling
+  cancelTimeoutInMinutes: number # how much time to give 'run always even if cancelled tasks' before killing them
+  variables: # several syntaxes, see specific section
+  steps: [ script | bash | pwsh | powershell | checkout | task | templateReference ]
+  services: { string: string | container } # container resources to run as a service container
+  uses: # Any resources (repos or pools) required by this job that are not already referenced
+    repositories: [ string ] # Repository references to Azure Git repositories
+    pools: [ string ] # Pool names, typically when using a matrix strategy for the job
+```
+
+For more information about `uses`, see [Limit job authorization scope to referenced Azure DevOps repositories](repos/azure-repos-git.md#limit-job-authorization-scope-to-referenced-azure-devops-repositories). For more information about workspaces, including clean options, see the [workspace](process/phases.md#workspace) topic in [Jobs](process/phases.md).
+
+:::moniker-end
+
+:::moniker range="<azure-devops"
+
 ```yaml
 jobs:
 - job: string  # name of the job (A-Z, a-z, 0-9, and underscore)
@@ -299,6 +332,10 @@ jobs:
 ```
 
 For more information about workspaces, including clean options, see the [workspace](process/phases.md#workspace) topic in [Jobs](process/phases.md).
+
+:::moniker-end
+
+
 
 # [Example](#tab/example)
 
@@ -516,9 +553,10 @@ jobs:
         steps:
         - script: echo my first deployment
 ```
-::: moniker-end
 
 ---
+
+::: moniker-end
 
 ## Steps
 
@@ -975,12 +1013,14 @@ The type and name fields are required when defining parameters. See all [paramet
 ```yaml
 parameters:
 - name: string          # name of the parameter; required
-  type: enum            # data types, see below
+  type: enum            # see the enum data types in the following section
   default: any          # default value; if no default, then the parameter MUST be given by the user at runtime
   values: [ string ]    # allowed list of values (for some data types)
 ```
 
 ### Types
+
+The `type` value must be one of the `enum` members from the following table.
 
 [!INCLUDE [parameter-data-types](process/includes/parameter-data-types.md)]
 
@@ -1086,8 +1126,8 @@ resources:
       branches:  # branch conditions to filter the events, optional; Defaults to all branches.
         include: [ string ]  # branches to consider the trigger events, optional; Defaults to all branches.
         exclude: [ string ]  # branches to discard the trigger events, optional; Defaults to none.
-      tags: [ string ]  # list of tags to evaluate for trigger event, optional; 
-      stages: [ string ] # list of stages to evaluate for trigger event, optional; 
+      tags: [ string ]  # list of tags to evaluate for trigger event, optional; 2020.1 and greater
+      stages: [ string ] # list of stages to evaluate for trigger event, optional; 2020.1 and greater
 ```
 # [Example](#tab/example)
 
@@ -1117,7 +1157,7 @@ resources:
 
 > [!IMPORTANT]
 > When you define a resource trigger, if its pipeline resource is from the same repo as the current pipeline, triggering follows the same branch and commit on which the event is raised.
-> But if the pipeline resource is from a different repo, the current pipeline is triggered on the branch specified by the **Default branch for manual and scheduled builds** setting. For more information, see [Branch considerations for pipeline completion triggers](process/pipeline-triggers.md?tabs=yaml#branch-considerations-for-pipeline-completion-triggers).
+> But if the pipeline resource is from a different repo, the current pipeline is triggered on the branch specified by the **Default branch for manual and scheduled builds** setting. For more information, see [Branch considerations for pipeline completion triggers](process/pipeline-triggers.md?tabs=yaml#branch-considerations).
 
 #### The pipeline resource metadata as predefined variables
 
@@ -2112,7 +2152,7 @@ Use the `checkout` keyword to configure or suppress this behavior.
 steps:
 - checkout: self  # self represents the repo where the initial Pipelines YAML file was found
   clean: boolean  # if true, execute `execute git clean -ffdx && git reset --hard HEAD` before fetching
-  fetchDepth: number  # the depth of commits to ask Git to fetch; defaults to no limit
+  fetchDepth: number  # the depth of commits to ask Git to fetch (applies to submodules too if they're enabled); defaults to no limit
   lfs: boolean  # whether to download Git-LFS files; defaults to false
   submodules: true | recursive  # set to 'true' for a single level of submodules or 'recursive' to get submodules of submodules; defaults to not checking out submodules
   path: string  # path to check out source code, relative to the agent's build directory (e.g. \_work\1); defaults to a directory called `s`
@@ -2232,6 +2272,7 @@ steps:
   target:
     container: string # where this step will run; values are the container name or the word 'host'
     commands: enum  # whether to process all logging commands from this step; values are `any` (default) or `restricted`
+    settableVariables: string # what variables are allowed; defaults to all; can be `none` or a list of allowed vars
   timeoutInMinutes: number
   inputs: { string: string }  # task-specific inputs
   env: { string: string }  # list of environment variables to add

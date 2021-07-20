@@ -9,7 +9,7 @@ metadata:
   author: KathrynEE
   ms.topic: troubleshooting
   monikerRange: '<= azure-devops'
-  ms.date: 02/11/2021
+  ms.date: 05/21/2021
 
 title: Query FAQs 
 
@@ -27,12 +27,11 @@ sections:
 
       - question: What's the difference between a query and a semantic search? 
         answer: |
-          While both query and search finds and list work items, the filter features and result presentation are different. To learn more, see [About managed queries, Managed work item queries versus semantic searches](about-managed-queries.md#semantic-v-managed).  
+          While both query and semantic search finds and list work items, the filter features and results presentation are different. To learn more, see [Functional work item search, Semantic search vs. managed work item queries](../../project/search/functional-work-item-search.md#semantic-search-vs-managed-work-item-queries).  
 
       - question: Can I export a query and import to another project?  
         answer: |
-          **Yes**. You can save a query as a `.wiq` file, update the syntax, and then import it to another project, organization, or collection.  can  both query and search finds 
-          and list work items, the filter features and result presentation are different. 
+          **Yes**. You can save a query as a `.wiq` file, update the syntax, and then import it to another project, organization, or collection.  
           To learn more, see [Cross-service and enhanced query operations](query-support-integration-cross-service-extensions.md#wiql).  
 
       - question: What are all the query filter functions? 
@@ -177,6 +176,10 @@ sections:
         answer: |
           **Yes**. Simply open a query in a new browser tab to run several queries at the same time.  
 
+      - question: What query macros are only supported from the web portal?
+        answer: |
+          The following macros are only supported from the web portal: **@CurrentIteration**, **@CurrentIteration +/- n**, **@Follows**, **@MyRecentActivity**, **@RecentMentions**, **@RecentProjectActivity**, **@TeamAreas**. Queries that contain these macros won't work when opened in Visual Studio/Team Explorer, Microsoft Excel, or Microsoft Project.
+
   - name: Navigate 
     questions: 
       - question: How do I quickly navigate to queries I view frequently? 
@@ -210,8 +213,17 @@ sections:
           - You can also use the macros &mdash; <strong>@Me</strong>, <strong>@Follows</strong>, **MyRecentActivity**, <strong>@RecentMentions</strong>, <strong>@RecentProjectActivity</strong> &mdash; to create custom queries that can filter for work items assigned to you, that you are following, and so on. To learn more about these macros, see [Query macros and variables](query-operators-variables.md#macros). 
 
 
+      - question: How do I sort on the Parent field?  
+        answer: | 
+          You can't. Sorting a query on the **Parent** field isn't a supported feature. 
+
   - name: Linked work item queries 
     questions: 
+
+      - question: How do I query for a list of related work items?   
+        answer:  |
+          You can't query for work items that contain links solely based on the **Related** link type. You can query for work items that have links by specifying `Related Link Count > 0`, however, the results contain all work items containing links to other work items, including **Parent-Child**, **Predecesor-Successor**, and other link types. 
+
       - question: Can I query for work items linked across projects? 
         answer:  |
           **No**. There is a prohibitive performance cost for trying to execute such a query, so it isn't supported. 
@@ -276,4 +288,3 @@ additionalContent: |
   -  [Work across projects FAQs](../../project/work-across-projects-faqs.yml)
   -  [Excel FAQs](../backlogs/office/faqs.yml)
 
-  *Have a question that didn't get answered? Feel free to ask it through one of the feedback links provided below.*

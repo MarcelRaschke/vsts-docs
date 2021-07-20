@@ -35,7 +35,7 @@ In this tutorial you learn how to:
 Restore file contents back to a known good version, removing unwanted changes.
 
 > [!WARNING]
-> These commands will overwrite your existing file changes. If you think you might want these changes later, consider [stashing](howto.md#stash) them instead.
+> These commands will overwrite your existing file changes. If you think you might want these changes later, consider [stashing](howto.yml#faq) them instead.
 
 #### [Visual Studio](#tab/visual-studio/)
 
@@ -62,7 +62,7 @@ You can revert the file to the version in a specific commit by providing the com
 &gt; git checkout <font color="#b5bd68">38035acd2 approuter.js</font>
 </pre>
 
-This differs from the earlier use of the `checkout` command used to swap to a different [branch](branches.md). 
+This differs from the earlier use of the `checkout` command used to swap to a different [branch](./create-branch.md). 
 Git will tell you if it is changing a file or swapping between branches in the output, and complain if it's not clear which one you are trying to do.
 
 * * *
@@ -129,4 +129,3 @@ been committed yet.
 
 > [!div class="nextstepaction"]
 > [Ignore files](ignore-files.md)
-

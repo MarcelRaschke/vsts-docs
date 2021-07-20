@@ -7,7 +7,7 @@ ms.technology: devops-agile
 ms.assetid: CCAE5254-A5F9-41CC-967E-7104BD36B932
 ms.author: kaelli
 author: KathrynEE
-ms.topic: conceptual
+ms.topic: best-practice
 monikerRange: '>= tfs-2013'
 ms.date: 11/19/2018
 ---
@@ -118,5 +118,5 @@ As the need to perform this work arises, capture it along with other items on yo
 
 ## Additional resources
 
-- [What is Agile?](/azure/devops/learn/agile/what-is-agile)  
-- [Building productive, customer focused teams](/azure/devops/learn/agile/productive-teams)  
+- [What is Agile?](/devops/plan/what-is-agile)  
+- [Building productive, customer focused teams](/devops/plan/building-productive-teams)  

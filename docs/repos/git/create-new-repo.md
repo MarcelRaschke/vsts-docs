@@ -18,7 +18,7 @@ Azure DevOps Services and TFS projects contain Git repositories, work items, bui
 ## Prerequisites
 
 * An organization in Azure DevOps. If you don't have one, you can [sign up](../../organizations/accounts/create-organization.md) for one for free. Each organization includes free, unlimited private Git repositories.
-* You must have the **Create repository** permission, which is granted by default to project administrators. For more information, see [Set repository permissions for Git or TFVC](../..//organizations/security/set-git-tfvc-repository-permissions.md#default-repository-permissions).
+* You must have the **Create repository** permission, which is granted by default to project administrators. For more information, see [Set Git repository permissions](set-git-repository-permissions.md).
 * Git command-line tools:
   * [Install Git for Windows](https://git-scm.com/download/win), which includes [Git Credential Manager Core](set-up-credential-managers.md#windows)
   * [Install Git for macOS and Linux](https://git-scm.com/downloads).
@@ -74,7 +74,7 @@ Azure DevOps Services and TFS projects contain Git repositories, work items, bui
 
 ## Clone the repo to your computer
 
-To work with a Git repo, you clone it to your computer. Cloning a repo creates a complete local copy of the repo for you to work with. Cloning also downloads all [commits](commits.md) and [branches](branches.md) in the repo and sets up a named relationship with the repo on the server. Use this relationship to interact with the existing repo, pushing and pulling changes to share code with your team.
+To work with a Git repo, you clone it to your computer. Cloning a repo creates a complete local copy of the repo for you to work with. Cloning also downloads all [commits](commits.md) and [branches](./create-branch.md) in the repo and sets up a named relationship with the repo on the server. Use this relationship to interact with the existing repo, pushing and pulling changes to share code with your team.
 
 ::: moniker range=">= azure-devops-2019"
 
@@ -92,7 +92,7 @@ To work with a Git repo, you clone it to your computer. Cloning a repo creates a
    git clone https://dev.azure.com/fabrikam-fiber/MyFirstProject/_git/
    ```
 
-   Git downloads a copy of the code into a new folder for you to work with. The download includes all [commits](../git/commits.md) and [branches](../git/branches.md) from the repo.
+   Git downloads a copy of the code into a new folder for you to work with. The download includes all [commits](../git/commits.md) and [branches](./create-branch.md) from the repo.
 
 4. Switch your directory to the repository that you cloned.
 
@@ -116,7 +116,7 @@ To work with a Git repo, you clone it to your computer. Cloning a repo creates a
    git clone https://fabrikam-fiber.visualstudio.com/DefaultCollection/MyFirstProject/_git/
    ```
   
-   After running the previous command, Git downloads a copy of the code into a new folder for you to work with. This download includes all [commits](commits.md) and [branches](branches.md) from the repo.
+   After running the previous command, Git downloads a copy of the code into a new folder for you to work with. This download includes all [commits](commits.md) and [branches](./create-branch.md) from the repo.
 
    Keep this command window open, as you'll use it in the following steps.
 
@@ -161,7 +161,7 @@ In this step, we'll make a change to the files on your computer, commit the chan
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [New to Git repos? Learn more](/azure/devops/learn/git/set-up-a-git-repository)
+> [New to Git repos? Learn more](/devops/develop/git/set-up-a-git-repository)
 
 > [!div class="nextstepaction"]
 > [Learn more about using Git in the Git tutorial](gitworkflow.md)
